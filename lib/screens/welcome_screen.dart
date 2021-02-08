@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:semester_calc_flutter/routes.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -56,7 +57,7 @@ class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
                 child: new Text('Start'),
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
-                      context, '/dashboard', (Route<dynamic> route) => false);
+                      context, AppRoutes.home, (Route<dynamic> route) => false);
                 },
               )
             ],

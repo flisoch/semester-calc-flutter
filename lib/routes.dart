@@ -1,4 +1,4 @@
 class AppRoutes {
   static final home = '/';
-  static final dashboard = '/dashboard';
+  static final startPage = '/start_page';
 }

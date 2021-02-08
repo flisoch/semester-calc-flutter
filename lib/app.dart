@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:semester_calc_flutter/models/app_state.dart';
 import 'package:semester_calc_flutter/routes.dart';
-import 'package:semester_calc_flutter/screens/dashboard.dart';
+import 'package:semester_calc_flutter/screens/home.dart';
 import 'package:semester_calc_flutter/screens/welcome_screen.dart';
 
 class App extends StatelessWidget {
@@ -18,9 +18,10 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: 'Semester load calc',
         theme: new ThemeData(primarySwatch: Colors.green),
+        initialRoute: AppRoutes.startPage,
         routes: {
-          AppRoutes.home: (context) => WelcomeScreen(),
-          AppRoutes.dashboard: (context) => DashboardScreen(),
+          AppRoutes.startPage: (context) => WelcomeScreen(),
+          AppRoutes.home: (context) => HomeScreen(),
         },
       ),
     );
