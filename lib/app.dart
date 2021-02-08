@@ -3,6 +3,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:semester_calc_flutter/models/app_state.dart';
 import 'package:semester_calc_flutter/routes.dart';
+import 'package:semester_calc_flutter/screens/dashboard.dart';
+import 'package:semester_calc_flutter/screens/welcome_screen.dart';
 
 class App extends StatelessWidget {
   final Store<AppState> store;
@@ -17,8 +19,8 @@ class App extends StatelessWidget {
         title: 'Semester load calc',
         theme: new ThemeData(primarySwatch: Colors.green),
         routes: {
-          // AppRoutes.home: (context) => Home(),
-          // AppRoutes.dashboard: (context) => Dashboard(),
+          AppRoutes.home: (context) => WelcomeScreen(),
+          AppRoutes.dashboard: (context) => DashboardScreen(),
         },
       ),
     );
