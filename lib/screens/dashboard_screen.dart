@@ -26,9 +26,15 @@ class ChartsWidgetState extends State<DashboardScreen> {
                   child: Container(
                     margin: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.lightGreen,
+                              Colors.green,
+                            ]),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        color: Colors.green
-                    ),
+                        color: Colors.green),
                     child: Column(
                       children: [
                         Row(
@@ -48,7 +54,8 @@ class ChartsWidgetState extends State<DashboardScreen> {
                           children: [
                             Text(
                               "Предметов",
-                              style: TextStyle(fontSize: 24, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 24, color: Colors.white),
                             ),
                           ],
                         ),
@@ -66,9 +73,15 @@ class ChartsWidgetState extends State<DashboardScreen> {
                   child: Container(
                     margin: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.lightGreen,
+                              Colors.green,
+                            ]),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        color: Colors.green
-                    ),
+                        color: Colors.green),
                     child: Column(
                       children: [
                         Row(
@@ -79,7 +92,8 @@ class ChartsWidgetState extends State<DashboardScreen> {
                               children: [
                                 Text(
                                   "12",
-                                  style: TextStyle(fontSize: 100, color: Colors.white),
+                                  style: TextStyle(
+                                      fontSize: 100, color: Colors.white),
                                 ),
                               ],
                             ),
@@ -93,14 +107,14 @@ class ChartsWidgetState extends State<DashboardScreen> {
                               child: Text(
                                 "Пар в неделю",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 23, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 23, color: Colors.white),
                               ),
                             ),
                           ],
                         ),
                       ],
                     ),
-
                   ),
                 ),
               ],
@@ -120,9 +134,15 @@ class ChartsWidgetState extends State<DashboardScreen> {
                   child: Container(
                     margin: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      color: Colors.green
-                    ),
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.lightGreen,
+                              Colors.green,
+                            ]),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        color: Colors.green),
                     // color: Colors.green,
                     child: Column(
                       children: [
@@ -143,7 +163,8 @@ class ChartsWidgetState extends State<DashboardScreen> {
                           children: [
                             Text(
                               "Экзамена",
-                              style: TextStyle(fontSize: 24, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 24, color: Colors.white),
                             ),
                           ],
                         ),
@@ -161,9 +182,15 @@ class ChartsWidgetState extends State<DashboardScreen> {
                   child: Container(
                     margin: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.lightGreen,
+                              Colors.green,
+                            ]),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        color: Colors.green
-                    ),
+                        color: Colors.green),
                     child: Column(
                       children: [
                         Row(
@@ -174,7 +201,8 @@ class ChartsWidgetState extends State<DashboardScreen> {
                               children: [
                                 Text(
                                   "18",
-                                  style: TextStyle(fontSize: 100, color: Colors.white),
+                                  style: TextStyle(
+                                      fontSize: 100, color: Colors.white),
                                 ),
                               ],
                             ),
@@ -184,7 +212,8 @@ class ChartsWidgetState extends State<DashboardScreen> {
                                 Container(
                                   child: Text(
                                     "ч",
-                                    style: TextStyle(fontSize: 24, color: Colors.white),
+                                    style: TextStyle(
+                                        fontSize: 24, color: Colors.white),
                                   ),
                                   padding: const EdgeInsets.only(bottom: 20.0),
                                 ),
@@ -200,14 +229,14 @@ class ChartsWidgetState extends State<DashboardScreen> {
                               child: Text(
                                 "Недельной нагрузки",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 24, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 24, color: Colors.white),
                               ),
                             ),
                           ],
                         ),
                       ],
                     ),
-
                   ),
                 ),
               ],
@@ -227,9 +256,15 @@ class ChartsWidgetState extends State<DashboardScreen> {
                   child: Container(
                     margin: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      color: Colors.green
-                    ),
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.lightGreen,
+                              Colors.green,
+                            ]),
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        color: Colors.green),
                     // color: Colors.green,
                     child: Column(
                       children: [
@@ -250,7 +285,8 @@ class ChartsWidgetState extends State<DashboardScreen> {
                           children: [
                             Text(
                               "Зачёта",
-                              style: TextStyle(fontSize: 24, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 24, color: Colors.white),
                             ),
                           ],
                         ),
@@ -268,9 +304,15 @@ class ChartsWidgetState extends State<DashboardScreen> {
                   child: Container(
                     margin: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.lightGreen,
+                              Colors.green,
+                            ]),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        color: Colors.green
-                    ),
+                        color: Colors.green),
                     child: Column(
                       children: [
                         Row(
@@ -281,7 +323,8 @@ class ChartsWidgetState extends State<DashboardScreen> {
                               children: [
                                 Text(
                                   "30",
-                                  style: TextStyle(fontSize: 100, color: Colors.white),
+                                  style: TextStyle(
+                                      fontSize: 100, color: Colors.white),
                                 ),
                               ],
                             ),
@@ -291,7 +334,8 @@ class ChartsWidgetState extends State<DashboardScreen> {
                                 Container(
                                   child: Text(
                                     "ч",
-                                    style: TextStyle(fontSize: 24, color: Colors.white),
+                                    style: TextStyle(
+                                        fontSize: 24, color: Colors.white),
                                   ),
                                   padding: const EdgeInsets.only(bottom: 20.0),
                                 ),
@@ -307,7 +351,8 @@ class ChartsWidgetState extends State<DashboardScreen> {
                               child: Text(
                                 "Рекомендуемой нагрузки",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 23, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 23, color: Colors.white),
                               ),
                             ),
                           ],

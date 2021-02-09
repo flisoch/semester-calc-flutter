@@ -29,6 +29,8 @@ dependencies:
   flutter_redux: 0.7.0
   google_sign_in: 4.5.6
   redux_logging: 0.4.0
+  fl_chart: ^0.12.2
+  percent_indicator: ^2.1.9+1
 
 
   # The following adds the Cupertino Icons font to your application.
