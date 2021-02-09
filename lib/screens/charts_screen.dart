@@ -6,11 +6,11 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 class ChartsScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return ChartsWidgetState();
+    return _ChartsWidgetState();
   }
 }
 
-class ChartsWidgetState extends State<ChartsScreen> {
+class _ChartsWidgetState extends State<ChartsScreen> {
   num selfStudyHours = 20;
   num studyHours = 40;
   List<bool> checkboxes = <bool>[true, false, false, true, true, false];

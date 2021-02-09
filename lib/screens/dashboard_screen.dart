@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class DashboardScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return ChartsWidgetState();
+    return _ChartsWidgetState();
   }
 }
 
-class ChartsWidgetState extends State<DashboardScreen> {
+class _ChartsWidgetState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(

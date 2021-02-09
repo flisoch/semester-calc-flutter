@@ -4,11 +4,11 @@ import 'package:semester_calc_flutter/models/Subject.dart';
 class SubjectsScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return ChartsWidgetState();
+    return _SubjectsWidgetState();
   }
 }
 
-class ChartsWidgetState extends State<SubjectsScreen> {
+class _SubjectsWidgetState extends State<SubjectsScreen> {
   List<Subject> _subjects = <Subject>[
     Subject(name: 'Дисциплина по выбору', elective: true, electives: [
       Subject(name: 'Интернет вещей'),
