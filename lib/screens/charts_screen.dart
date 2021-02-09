@@ -234,55 +234,69 @@ class ChartsWidgetState extends State<ChartsScreen> {
             shrinkWrap: true,
             children: [
               CheckboxListTile(
-                title: const Text('Animate Slowly'),
+                title: const Text('Дисциплина по выбору'),
                 value: checkboxes[0],
                 onChanged: (bool value) {
                   setState(() {
                     checkboxes[0] = value;
                   });
                 },
-                secondary: const Icon(Icons.hourglass_empty),
+                secondary: const Icon(Icons.school),
               ),
               CheckboxListTile(
-                title: const Text('Animate Slowly'),
+                activeColor: Colors.lightBlue,
+                title: const Text('Self-study'),
                 value: checkboxes[1],
                 onChanged: (bool value) {
                   setState(() {
                     checkboxes[1] = value;
                   });
                 },
-                secondary: const Icon(Icons.hourglass_empty),
+                secondary: const Icon(Icons.home_work_outlined),
               ),
               CheckboxListTile(
-                title: const Text('Animate Slowly'),
+                title: const Text('Методология научных исследований'),
                 value: checkboxes[2],
                 onChanged: (bool value) {
                   setState(() {
                     checkboxes[2] = value;
                   });
                 },
-                secondary: const Icon(Icons.hourglass_empty),
+                secondary: const Icon(Icons.school),
               ),
               CheckboxListTile(
-                title: const Text('Animate Slowly'),
+                activeColor: Colors.lightBlue,
+                title: const Text('Self-study'),
                 value: checkboxes[3],
                 onChanged: (bool value) {
                   setState(() {
                     checkboxes[3] = value;
                   });
                 },
-                secondary: const Icon(Icons.hourglass_empty),
+                secondary: const Icon(Icons.home_work_outlined),
               ),
               CheckboxListTile(
-                title: const Text('Animate Slowly'),
+                title: const Text('Основы информационного поиска'),
                 value: checkboxes[4],
                 onChanged: (bool value) {
                   setState(() {
                     checkboxes[4] = value;
                   });
                 },
-                secondary: const Icon(Icons.hourglass_empty),
+                secondary: const Icon(Icons.school),
               ),
+              CheckboxListTile(
+                activeColor: Colors.lightBlue,
+                title: const Text('Self-study'),
+                value: checkboxes[5],
+                onChanged: (bool value) {
+                  setState(() {
+                    checkboxes[5] = value;
+                  });
+                },
+                secondary: const Icon(Icons.home_work_outlined),
+              ),
+
             ],
           ),
         )

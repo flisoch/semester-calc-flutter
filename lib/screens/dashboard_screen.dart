@@ -30,7 +30,7 @@ class ChartsWidgetState extends State<DashboardScreen> {
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                             colors: [
-                              Colors.lightGreen,
+                              Colors.lightBlue,
                               Colors.green,
                             ]),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -77,7 +77,7 @@ class ChartsWidgetState extends State<DashboardScreen> {
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                             colors: [
-                              Colors.lightGreen,
+                              Colors.lightBlue,
                               Colors.green,
                             ]),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -138,7 +138,7 @@ class ChartsWidgetState extends State<DashboardScreen> {
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                             colors: [
-                              Colors.lightGreen,
+                              Colors.lightBlue,
                               Colors.green,
                             ]),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -186,7 +186,7 @@ class ChartsWidgetState extends State<DashboardScreen> {
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                             colors: [
-                              Colors.lightGreen,
+                              Colors.lightBlue,
                               Colors.green,
                             ]),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -260,7 +260,7 @@ class ChartsWidgetState extends State<DashboardScreen> {
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                             colors: [
-                              Colors.lightGreen,
+                              Colors.lightBlue,
                               Colors.green,
                             ]),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -308,7 +308,7 @@ class ChartsWidgetState extends State<DashboardScreen> {
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                             colors: [
-                              Colors.lightGreen,
+                              Colors.lightBlue,
                               Colors.green,
                             ]),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
