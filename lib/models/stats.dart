@@ -8,13 +8,14 @@ class Stats extends Object {
   final num hoursPerWeek;
   final num weeksUntilExams;
 
-  Stats(
-      this.subjectsCount,
-      this.examsCount,
-      this.creditsCount,
-      this.classesPerWeek,
-      this.classesPerDay,
-      this.classesToday,
-      this.hoursPerWeek,
-      this.weeksUntilExams);
+  Stats({
+    this.subjectsCount,
+    this.examsCount,
+    this.creditsCount,
+    this.classesPerWeek,
+    this.classesPerDay,
+    this.classesToday,
+    this.hoursPerWeek,
+    this.weeksUntilExams,
+  });
 }

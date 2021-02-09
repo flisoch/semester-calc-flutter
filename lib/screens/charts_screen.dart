@@ -11,7 +11,7 @@ class ChartsScreen extends StatefulWidget {
 }
 
 class ChartsWidgetState extends State<ChartsScreen> {
-  num selfStudyHours = 21;
+  num selfStudyHours = 20;
   num studyHours = 40;
   List<bool> checkboxes = <bool>[true, false, false, true, true, false];
 
