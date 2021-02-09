@@ -61,24 +61,6 @@ class ChartsWidgetState extends State<SubjectsScreen> {
           },
         ),
       )
-          // RadioListTile<String>(
-          //   title: Text('${element.name}'),
-          //   value: element.name,
-          //   groupValue: _selectedElective,
-          //   toggleable: true,
-          //
-          //   secondary: OutlineButton(
-          //     child: Text("Посмотреть"),
-          //     onPressed: () {
-          //       print("Say Hello");
-          //     },
-          //   ),
-          //   onChanged: (String value) {
-          //     setState(() {
-          //       _selectedElective = value;
-          //     });
-          //   },
-          // ),
           );
     });
     return electives;
