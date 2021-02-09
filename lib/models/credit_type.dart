@@ -1,0 +1,1 @@
+enum CreditType { EXAM, CREDIT }

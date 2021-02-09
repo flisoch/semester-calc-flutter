@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:semester_calc_flutter/models/Subject.dart';
+import 'package:semester_calc_flutter/models/credit_type.dart';
+import 'package:semester_calc_flutter/models/subject.dart';
+import 'package:semester_calc_flutter/routes.dart';
 
 class SubjectsScreen extends StatefulWidget {
   @override
@@ -10,10 +12,14 @@ class SubjectsScreen extends StatefulWidget {
 
 class _SubjectsWidgetState extends State<SubjectsScreen> {
   List<Subject> _subjects = <Subject>[
-    Subject(name: 'Дисциплина по выбору', elective: true, electives: [
-      Subject(name: 'Интернет вещей'),
-      Subject(name: 'Проектирование человеко-машинных интерфейсов'),
-    ]),
+    Subject(
+        name: 'Дисциплина по выбору',
+        creditType: CreditType.EXAM,
+        elective: true,
+        electives: [
+          Subject(name: 'Интернет вещей'),
+          Subject(name: 'Проектирование человеко-машинных интерфейсов'),
+        ]),
     Subject(name: 'Методология научных исследований'),
     Subject(name: 'основы информационного поиска')
   ];
@@ -26,16 +32,28 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
         padding: EdgeInsets.all(8),
         itemCount: _subjects.length,
         itemBuilder: (BuildContext context, num index) {
-          return _subjects[index].elective
+          Subject subject = _subjects[index];
+          return subject.elective
               ? ListTile(
-                  title: Text('${_subjects[index].name}'),
+                  contentPadding: EdgeInsets.only(left: 5),
+                  title: Text('${subject.name}'),
+                  leading: subject.creditType == CreditType.CREDIT
+                      ? Icon(Icons.assistant_photo, color: Colors.lightBlue,)
+                      : Icon(Icons.assistant_photo, color: Colors.green,),
                   subtitle: Column(
-                    children: _buildElectives(_subjects[index]),
+                    children: _buildElectives(subject),
                   ),
                 )
               : ListTile(
-                  title: Text('${_subjects[index].name}'),
-                  // onTap: ,
+                  contentPadding: EdgeInsets.only(left: 5),
+                  leading: subject.creditType == CreditType.CREDIT
+                      ? Icon(Icons.assistant_photo, color: Colors.lightBlue,)
+                      : Icon(Icons.assistant_photo, color: Colors.green,),
+                  title: Text('${subject.name}'),
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.subject,
+                        arguments: subject);
+                  },
                 );
         });
   }
@@ -60,8 +78,10 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
             });
           },
         ),
-      )
-          );
+        onTap: () {
+          Navigator.pushNamed(context, AppRoutes.subject, arguments: element);
+        },
+      ));
     });
     return electives;
   }
