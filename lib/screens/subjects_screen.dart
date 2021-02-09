@@ -43,26 +43,43 @@ class ChartsWidgetState extends State<SubjectsScreen> {
   _buildElectives(Subject subject) {
     List<Widget> electives = <Widget>[];
     subject.electives.forEach((element) {
-      electives.add(
-        RadioListTile<String>(
-          title: Text('${element.name}'),
+      electives.add(ListTile(
+        title: Text(
+          element.name,
+          style: TextStyle(
+              color: element.name == _selectedElective
+                  ? Colors.black
+                  : Colors.black38),
+        ),
+        trailing: Radio(
           value: element.name,
           groupValue: _selectedElective,
-          toggleable: true,
-
-          secondary: OutlineButton(
-            child: Text("Посмотреть"),
-            onPressed: () {
-              print("Say Hello");
-            },
-          ),
           onChanged: (String value) {
             setState(() {
               _selectedElective = value;
             });
           },
         ),
-      );
+      )
+          // RadioListTile<String>(
+          //   title: Text('${element.name}'),
+          //   value: element.name,
+          //   groupValue: _selectedElective,
+          //   toggleable: true,
+          //
+          //   secondary: OutlineButton(
+          //     child: Text("Посмотреть"),
+          //     onPressed: () {
+          //       print("Say Hello");
+          //     },
+          //   ),
+          //   onChanged: (String value) {
+          //     setState(() {
+          //       _selectedElective = value;
+          //     });
+          //   },
+          // ),
+          );
     });
     return electives;
   }
