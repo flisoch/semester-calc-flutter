@@ -17,8 +17,8 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
         creditType: CreditType.EXAM,
         elective: true,
         electives: [
-          Subject(name: 'Интернет вещей'),
-          Subject(name: 'Проектирование человеко-машинных интерфейсов'),
+          Subject.fullDummy(),
+          Subject(name: 'Проектирование человеко-машинных интерфейсов', creditType: CreditType.EXAM),
         ]),
     Subject(name: 'Методология научных исследований'),
     Subject(name: 'основы информационного поиска')
