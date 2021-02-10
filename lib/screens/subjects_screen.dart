@@ -20,7 +20,10 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
         elective: true,
         electives: [
           Subject.fullDummy(),
-          Subject(name: 'Проектирование человеко-машинных интерфейсов', creditType: CreditType.EXAM),
+          Subject(
+              name: 'Проектирование человеко-машинных интерфейсов',
+              creditType: CreditType.EXAM,
+              hours: Hours.dummy()),
         ]),
     Subject(name: 'Методология научных исследований', hours: Hours.dummy()),
     Subject(name: 'основы информационного поиска', hours: Hours.dummy())
@@ -40,8 +43,14 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
                   contentPadding: EdgeInsets.only(left: 5),
                   title: Text('${subject.name}'),
                   leading: subject.creditType == CreditType.CREDIT
-                      ? Icon(Icons.assistant_photo, color: Colors.lightBlue,)
-                      : Icon(Icons.assistant_photo, color: Colors.green,),
+                      ? Icon(
+                          Icons.assistant_photo,
+                          color: Colors.lightBlue,
+                        )
+                      : Icon(
+                          Icons.assistant_photo,
+                          color: Colors.green,
+                        ),
                   subtitle: Column(
                     children: _buildElectives(subject),
                   ),
@@ -49,8 +58,14 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
               : ListTile(
                   contentPadding: EdgeInsets.only(left: 5),
                   leading: subject.creditType == CreditType.CREDIT
-                      ? Icon(Icons.assistant_photo, color: Colors.lightBlue,)
-                      : Icon(Icons.assistant_photo, color: Colors.green,),
+                      ? Icon(
+                          Icons.assistant_photo,
+                          color: Colors.lightBlue,
+                        )
+                      : Icon(
+                          Icons.assistant_photo,
+                          color: Colors.green,
+                        ),
                   title: Text('${subject.name}'),
                   onTap: () {
                     Navigator.pushNamed(context, AppRoutes.subject,

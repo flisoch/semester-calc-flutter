@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/screens/settings_screen.dart';
 import 'package:semester_calc_flutter/screens/subjects_screen.dart';
 
@@ -41,7 +42,12 @@ class _HomeWidgetState extends State<HomeScreen> {
           DashboardScreen(),
           ChartsScreen(),
           SubjectsScreen(),
-          SettingsScreen(),
+          SettingsScreen(
+            groupNumber: '11-701',
+            electives: List.of([Subject.fullDummy()]),
+            clearElectives: () => print('clearElectives!'),
+            clearGroup: () => print('clearGroup!'),
+          ),
         ],
       ),
     );

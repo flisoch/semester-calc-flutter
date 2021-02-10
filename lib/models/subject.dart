@@ -6,15 +6,17 @@ import 'credit_type.dart';
 import 'hours.dart';
 
 class Subject extends Object {
-  String name;
-  bool elective;
-  List<Subject> electives;
-  List<Class> classes;
-  CreditType creditType;
-  String syllabusLink;
-  Hours hours;
+  final String name;
+  final bool elective;
+  final List<Subject> electives;
+  final Subject electiveDescriptor;
+  final List<Class> classes;
+  final CreditType creditType;
+  final String syllabusLink;
+  final Hours hours;
 
   Subject({
+    this.electiveDescriptor,
     this.name,
     this.hours,
     this.elective = false,
@@ -50,6 +52,7 @@ class Subject extends Object {
       classes: classes,
       syllabusLink: "https://kpfu.ru/pdf/portal/oop/179283.pdf",
       hours: hours,
+      electiveDescriptor: Subject(name: 'Предмет по выбору'),
     );
   }
 }
