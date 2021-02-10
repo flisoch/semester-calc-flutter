@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/models/credit_type.dart';
 import 'package:semester_calc_flutter/models/hours.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
+import 'package:semester_calc_flutter/repository/subjects_repository.dart';
 import 'package:semester_calc_flutter/routes.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,77 +35,84 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
   String _selectedElective = "";
 
   Future<List<Subject>> subjects;
+  final _subjectsRepository = SubjectsRepository();
 
   @override
   void initState() {
     super.initState();
-    subjects = fetchSubjects();
   }
-
-  Future<List<Subject>> fetchSubjects() async {
-    //todo: take group Number from reduxStore
-    final response =
-        await http.get('http://192.168.1.167:8080/api/subjects?groupNumber=11-701');
-    List<Subject> subjects = [];
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      subjects = (jsonDecode(utf8.decode(response.bodyBytes)) as List)
-          .map((i) => Subject.fromJson(i))
-          .toList();
-      subjects.forEach((element) {
-        print(element.name);
-      });
-      return subjects;
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load album');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        padding: EdgeInsets.all(8),
-        itemCount: _subjects.length,
-        itemBuilder: (BuildContext context, num index) {
-          Subject subject = _subjects[index];
-          return subject.elective
-              ? ListTile(
-                  contentPadding: EdgeInsets.only(left: 5),
-                  title: Text('${subject.name}'),
-                  leading: subject.creditType == CreditType.CREDIT
-                      ? Icon(
-                          Icons.assistant_photo,
-                          color: Colors.lightBlue,
-                        )
-                      : Icon(
-                          Icons.assistant_photo,
-                          color: Colors.green,
-                        ),
-                  subtitle: Column(
-                    children: _buildElectives(subject),
-                  ),
-                )
-              : ListTile(
-                  contentPadding: EdgeInsets.only(left: 5),
-                  leading: subject.creditType == CreditType.CREDIT
-                      ? Icon(
-                          Icons.assistant_photo,
-                          color: Colors.lightBlue,
-                        )
-                      : Icon(
-                          Icons.assistant_photo,
-                          color: Colors.green,
-                        ),
-                  title: Text('${subject.name}'),
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.subject,
-                        arguments: subject);
-                  },
-                );
-        });
+
+    //todo: rebuild, electives are subjects with descriptor, group electives with same descriptor
+    return FutureBuilder(
+        future: loadSubjects(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            _subjects = snapshot.data as List<Subject>;
+            List<Subject> electives;
+            List<Subject> notElectives;
+            Map<num, Subject> groupedElectives = Map();
+            electives =
+                _subjects.where((element) => element.elective).toList();
+            notElectives =
+                _subjects.where((element) => !element.elective).toList();
+            electives.forEach((element) {
+              num descrId = element.electiveDescriptor.id;
+              var oldId = groupedElectives.keys.firstWhere((element) =>
+              element == descrId, orElse: () {
+                groupedElectives.putIfAbsent(descrId, () => element);
+              },);
+              if (oldId != null) {
+                groupedElectives.putIfAbsent(oldId, () => element);
+              }
+            });
+            return ListView.builder(
+                padding: EdgeInsets.all(8),
+                itemCount: _subjects.length,
+                itemBuilder: (BuildContext context, num index) {
+                  Subject subject = _subjects[index];
+                  return subject.elective
+                      ? ListTile(
+                    contentPadding: EdgeInsets.only(left: 5),
+                    title: Text('${subject.name}'),
+                    leading: subject.creditType == CreditType.CREDIT
+                        ? Icon(
+                      Icons.assistant_photo,
+                      color: Colors.lightBlue,
+                    )
+                        : Icon(
+                      Icons.assistant_photo,
+                      color: Colors.green,
+                    ),
+                    subtitle: Column(
+                      children: _buildElectives(subject),
+                    ),
+                  )
+                      : ListTile(
+                    contentPadding: EdgeInsets.only(left: 5),
+                    leading: subject.creditType == CreditType.CREDIT
+                        ? Icon(
+                      Icons.assistant_photo,
+                      color: Colors.lightBlue,
+                    )
+                        : Icon(
+                      Icons.assistant_photo,
+                      color: Colors.green,
+                    ),
+                    title: Text('${subject.name}'),
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.subject,
+                          arguments: subject);
+                    },
+                  );
+                });
+          }
+          else {
+            return CircularProgressIndicator();
+          }
+        }
+    );
   }
 
   _buildElectives(Subject subject) {
@@ -133,5 +141,9 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
       ));
     });
     return electives;
+  }
+
+  Future<List<Subject>> loadSubjects() async {
+    return _subjectsRepository.loadSubjects('11-701');
   }
 }

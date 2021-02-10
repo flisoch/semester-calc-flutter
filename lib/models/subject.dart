@@ -1,5 +1,6 @@
 import 'package:semester_calc_flutter/models/calendar_event.dart';
 import 'package:semester_calc_flutter/models/class.dart';
+import 'package:semester_calc_flutter/models/elective_descriptor.dart';
 import 'package:semester_calc_flutter/models/teacher.dart';
 
 import 'credit_type.dart';
@@ -9,7 +10,7 @@ class Subject extends Object {
   final String name;
   final bool elective;
   final List<Subject> electives;
-  final Subject electiveDescriptor;
+  final ElectiveDescriptor electiveDescriptor;
   final List<Class> classes;
   final CreditType creditType;
   final String syllabusLink;
@@ -52,7 +53,7 @@ class Subject extends Object {
       classes: classes,
       syllabusLink: "https://kpfu.ru/pdf/portal/oop/179283.pdf",
       hours: hours,
-      electiveDescriptor: Subject(name: 'Предмет по выбору'),
+      electiveDescriptor: ElectiveDescriptor(),
     );
   }
 
@@ -60,6 +61,10 @@ class Subject extends Object {
     var hours = json['hours'];
     var creditType =
         json['creditType'] == 'CREDIT' ? CreditType.CREDIT : CreditType.EXAM;
+    var electiveDescriptor = json['electiveDescriptor'] == null
+        ? ElectiveDescriptor()
+        : ElectiveDescriptor.fromJson(json['electiveDescriptor']);
+
     return Subject(
       name: json['name'],
       syllabusLink: json['syllabus'] ??
@@ -69,8 +74,8 @@ class Subject extends Object {
           school: hours['school'],
           selfStudy: hours['selfDependant']),
       creditType: creditType,
-      //todo: make backend and frontend elective mark consistent
-      elective: !json['elective'],
+      elective: json['elective'],
+      electiveDescriptor: electiveDescriptor,
     );
   }
 }
