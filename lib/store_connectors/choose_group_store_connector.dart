@@ -29,14 +29,8 @@ class ChooseGroupViewModel {
       saveGroup: (BuildContext context, String groupNUmber) {
         store.dispatch(SaveGroupNumberAction(groupNUmber));
         store.dispatch(NavigatePushAction(AppRoutes.home));
-        // SchedulerBinding.instance.addPostFrameCallback((_) {
-        //
-        //   Navigator.pushNamedAndRemoveUntil(
-        //       context, AppRoutes.home, (Route<dynamic> route) => false);
-        // });
 
       },
-      // groupNumber: store.state.groupNumber,
     );
   }
 

@@ -13,7 +13,6 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
   String dropdownGroupValue = '11-701';
-  String finalGroupValue = '';
   Function _saveGroup;
 
   _WelcomeScreenWidgetState(Function _saveGroup) {
@@ -65,7 +64,9 @@ class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
               ElevatedButton(
 
                 child: new Text('Начать'),
-                onPressed: _saveGroup(context, finalGroupValue),
+                onPressed: () {
+                  return _saveGroup(context, dropdownGroupValue);
+                },
               )
             ],
           ),
