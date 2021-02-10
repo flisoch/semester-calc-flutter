@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/models/credit_type.dart';
+import 'package:semester_calc_flutter/models/hours.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/routes.dart';
 
@@ -14,14 +15,15 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
   List<Subject> _subjects = <Subject>[
     Subject(
         name: 'Дисциплина по выбору',
+        hours: Hours.dummy(),
         creditType: CreditType.EXAM,
         elective: true,
         electives: [
           Subject.fullDummy(),
           Subject(name: 'Проектирование человеко-машинных интерфейсов', creditType: CreditType.EXAM),
         ]),
-    Subject(name: 'Методология научных исследований'),
-    Subject(name: 'основы информационного поиска')
+    Subject(name: 'Методология научных исследований', hours: Hours.dummy()),
+    Subject(name: 'основы информационного поиска', hours: Hours.dummy())
   ];
 
   String _selectedElective = "";

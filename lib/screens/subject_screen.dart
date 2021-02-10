@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/models/credit_type.dart';
+import 'package:semester_calc_flutter/models/hours.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/models/teacher.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -45,6 +46,12 @@ class SubjectWidgetState extends State<SubjectScreen> {
           context: context,
           tiles: [
             ListTile(
+              title: Text('Control form'),
+              subtitle: subject.creditType == CreditType.EXAM
+                  ? Text('Exam')
+                  : Text('Credit'),
+            ),
+            ListTile(
               contentPadding: EdgeInsets.only(left: 20, right: 30),
               title: Text('Syllabus'),
               subtitle: Text('${subject.syllabusLink}'),
@@ -57,6 +64,12 @@ class SubjectWidgetState extends State<SubjectScreen> {
                   ? _buildTeachers(subject, 1)
                   : _buildTeachers(subject, 2),
             ),
+            ListTile(
+              title: Text('Hours load'),
+              subtitle: _buildHours(subject),
+
+            ),
+
           ],
         ).toList(),
       ),
@@ -106,5 +119,19 @@ class SubjectWidgetState extends State<SubjectScreen> {
         )
       ]);
     }
+  }
+
+  _buildHours(Subject subject) {
+    Hours hours = subject.hours;
+    return Column(children: [
+      ListTile(
+        title: Text('in-house'),
+        subtitle: Text('${hours.school} h'),
+      ),
+      ListTile(
+        title: Text('self-study'),
+        subtitle: Text('${hours.selfStudy} h'),
+      )
+    ]);
   }
 }

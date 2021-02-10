@@ -3,6 +3,7 @@ import 'package:semester_calc_flutter/models/class.dart';
 import 'package:semester_calc_flutter/models/teacher.dart';
 
 import 'credit_type.dart';
+import 'hours.dart';
 
 class Subject extends Object {
   String name;
@@ -11,14 +12,17 @@ class Subject extends Object {
   List<Class> classes;
   CreditType creditType;
   String syllabusLink;
+  Hours hours;
 
   Subject({
     this.name,
+    this.hours,
     this.elective = false,
     this.electives = const [],
     this.classes = const [],
     this.creditType = CreditType.CREDIT,
-    this.syllabusLink = "https://kpfu.ru/itis/obuchenie-v-itis/osnovnye-obrazovatelnye-programmy",
+    this.syllabusLink =
+        "https://kpfu.ru/itis/obuchenie-v-itis/osnovnye-obrazovatelnye-programmy",
   });
 
   factory Subject.fullDummy() {
@@ -39,10 +43,13 @@ class Subject extends Object {
     Class lecture = Class(teacher: teacher, calendarEvent: calendarEvent1);
     Class seminar = Class(teacher: teacher, calendarEvent: calendarEvent2);
     List<Class> classes = [lecture, seminar];
+    Hours hours = Hours.dummy();
     return Subject(
-        name: "Интернет вещей",
-        creditType: CreditType.EXAM,
-        classes: classes,
-        syllabusLink: "https://kpfu.ru/pdf/portal/oop/179283.pdf");
+      name: "Интернет вещей",
+      creditType: CreditType.EXAM,
+      classes: classes,
+      syllabusLink: "https://kpfu.ru/pdf/portal/oop/179283.pdf",
+      hours: hours,
+    );
   }
 }
