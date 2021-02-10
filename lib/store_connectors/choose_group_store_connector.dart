@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:semester_calc_flutter/actions/actions.dart';
 import 'package:semester_calc_flutter/models/app_state.dart';
+import 'package:semester_calc_flutter/routes.dart';
 import 'package:semester_calc_flutter/screens/welcome_screen.dart';
 
 class ChooseGroupConnector extends StatelessWidget {
@@ -27,6 +28,7 @@ class ChooseGroupViewModel {
     return ChooseGroupViewModel(
       saveGroup: (BuildContext context, String groupNUmber) {
         store.dispatch(SaveGroupNumberAction(groupNUmber));
+        store.dispatch(NavigatePushAction(AppRoutes.home));
         // SchedulerBinding.instance.addPostFrameCallback((_) {
         //
         //   Navigator.pushNamedAndRemoveUntil(

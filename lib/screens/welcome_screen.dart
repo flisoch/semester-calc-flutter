@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:semester_calc_flutter/routes.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  Function _saveGroup;
+  final Function _saveGroup;
 
   WelcomeScreen(this._saveGroup);
 
@@ -52,7 +51,6 @@ class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
                       })).toList(),
                       onChanged: (groupNumber) => setState(() {
                         dropdownGroupValue = groupNumber;
-                        finalGroupValue = groupNumber;
                       }),
                     ),
                   ),
@@ -65,6 +63,7 @@ class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
+
                 child: new Text('Начать'),
                 onPressed: _saveGroup(context, finalGroupValue),
               )

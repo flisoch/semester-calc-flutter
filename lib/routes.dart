@@ -1,6 +1,6 @@
 class AppRoutes {
-  static final home = '/';
-  static final startPage = '/start_page';
-  static final subject = '/subject';
+  static const home = '/';
+  static const startPage = '/start_page';
+  static const subject = '/subject';
 
 }
