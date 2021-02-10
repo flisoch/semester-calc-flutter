@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 
-import '../routes.dart';
-
 class SettingsScreen extends StatelessWidget {
   final String groupNumber;
   final List<Subject> electives;
@@ -25,14 +23,14 @@ class SettingsScreen extends StatelessWidget {
           title: Text('Выбрать группу'),
           subtitle: Text('$groupNumber'),
           trailing: Icon(Icons.subject),
-          onTap: changeGroup,
+          onTap: () => changeGroup(),
         ),
         ListTile(
           title: Text('Выбранные элективы'),
           subtitle: _buildElectives(electives),
           trailing: IconButton(
             icon: Icon(Icons.delete_outline),
-            onPressed: clearElectives,
+            onPressed: () => clearElectives(),
           ),
         ),
         ListTile(
@@ -42,7 +40,7 @@ class SettingsScreen extends StatelessWidget {
             child: Text('Подключить'),
             onPressed: () => print('Connect google calendar!'),
           ),
-          onTap: clearElectives,
+          onTap: () => print('connect google Tile!'),
         )
       ]).toList(),
     );

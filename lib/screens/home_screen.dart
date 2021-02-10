@@ -32,6 +32,7 @@ class _HomeWidgetState extends State<HomeScreen> {
 
   _HomeWidgetState(String groupNumber, Function changeGroup,
       Function clearElectives) {
+    this.clearElectives = clearElectives;
     this.groupNumber = groupNumber;
     this.changeGroup = changeGroup;
   }
@@ -66,8 +67,8 @@ class _HomeWidgetState extends State<HomeScreen> {
           SettingsScreen(
             groupNumber: groupNumber,
             electives: List.of([Subject.fullDummy()]),
-            clearElectives: () => clearElectives,
-            changeGroup: () => changeGroup,
+            clearElectives: clearElectives,
+            changeGroup: changeGroup,
           ),
         ],
       ),
