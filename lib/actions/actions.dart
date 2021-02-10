@@ -1,4 +1,30 @@
+import 'package:semester_calc_flutter/models/stats.dart';
+
 class ClearGroupNumberAction {}
+
+class LoadStatsAction {
+  final String groupNumber;
+
+  LoadStatsAction(this.groupNumber);
+
+  @override
+  String toString() {
+    return 'LoadStatsAction{groupNUmber: $groupNumber}';
+  }
+}
+
+class StatsNotLoadedAction {}
+
+class StatsLoadedAction {
+  final Stats stats;
+
+  StatsLoadedAction(this.stats);
+
+  @override
+  String toString() {
+    return 'StatsLoadedAction{stats: $stats}';
+  }
+}
 
 class SaveGroupNumberAction {
   final String groupNumber;

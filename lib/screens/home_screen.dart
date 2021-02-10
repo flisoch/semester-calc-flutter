@@ -2,25 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/screens/settings_screen.dart';
 import 'package:semester_calc_flutter/screens/subjects_screen.dart';
+import 'package:semester_calc_flutter/store_connectors/dashboard_store_connector.dart';
 
 import 'charts_screen.dart';
-import 'dashboard_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  String groupNumber;
-  Function clearElectives;
-  Function changeGroup;
+  final String groupNumber;
+  final Function clearElectives;
+  final Function changeGroup;
+  // final Stats stats;
 
   HomeScreen({
     @required this.groupNumber,
     @required this.clearElectives,
     @required this.changeGroup,
+    // @required this.stats,
   });
 
   @override
   State<StatefulWidget> createState() {
     return _HomeWidgetState(
-        this.groupNumber, this.changeGroup, this.clearElectives);
+      groupNumber: groupNumber,
+      changeGroup: changeGroup,
+      clearElectives: clearElectives,
+      // stats: stats,
+    );
   }
 }
 
@@ -29,13 +35,14 @@ class _HomeWidgetState extends State<HomeScreen> {
   String groupNumber;
   Function clearElectives;
   Function changeGroup;
+  // Stats stats;
 
-  _HomeWidgetState(String groupNumber, Function changeGroup,
-      Function clearElectives) {
-    this.clearElectives = clearElectives;
-    this.groupNumber = groupNumber;
-    this.changeGroup = changeGroup;
-  }
+  _HomeWidgetState({
+    @required this.groupNumber,
+    @required this.clearElectives,
+    @required this.changeGroup,
+    // @required this.stats,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +68,7 @@ class _HomeWidgetState extends State<HomeScreen> {
       body: IndexedStack(
         index: _selectedIndex,
         children: [
-          DashboardScreen(),
+          DashboardStoreConnector(groupNumber: groupNumber,),
           ChartsScreen(),
           SubjectsScreen(),
           SettingsScreen(

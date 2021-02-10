@@ -6,7 +6,7 @@ import 'package:semester_calc_flutter/models/teacher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SubjectScreen extends StatefulWidget {
-  Subject subject;
+  final Subject subject;
 
   SubjectScreen(this.subject);
 

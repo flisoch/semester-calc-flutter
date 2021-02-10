@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:semester_calc_flutter/models/stats.dart';
 
 class DashboardScreen extends StatefulWidget {
+  final Stats stats;
+
+  DashboardScreen({@required this.stats});
+
   @override
   State<StatefulWidget> createState() {
-    return _ChartsWidgetState();
+    return _ChartsWidgetState(stats: stats);
   }
 }
 
 class _ChartsWidgetState extends State<DashboardScreen> {
+  final Stats stats;
+
+  _ChartsWidgetState({@required this.stats});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,7 +51,7 @@ class _ChartsWidgetState extends State<DashboardScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              "6",
+                              '${stats.subjectsCount}',
                               style:
                                   TextStyle(fontSize: 100, color: Colors.white),
                             ),
@@ -91,7 +100,7 @@ class _ChartsWidgetState extends State<DashboardScreen> {
                             Column(
                               children: [
                                 Text(
-                                  "12",
+                                  '${stats.classesPerWeek}',
                                   style: TextStyle(
                                       fontSize: 100, color: Colors.white),
                                 ),
@@ -151,7 +160,7 @@ class _ChartsWidgetState extends State<DashboardScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              "3",
+                              '${stats.examsCount}',
                               style:
                                   TextStyle(fontSize: 100, color: Colors.white),
                             ),
@@ -200,7 +209,7 @@ class _ChartsWidgetState extends State<DashboardScreen> {
                             Column(
                               children: [
                                 Text(
-                                  "18",
+                                  '${stats.hoursPerWeek}',
                                   style: TextStyle(
                                       fontSize: 100, color: Colors.white),
                                 ),
@@ -273,7 +282,7 @@ class _ChartsWidgetState extends State<DashboardScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              "3",
+                              '${stats.creditsCount}',
                               style:
                                   TextStyle(fontSize: 100, color: Colors.white),
                             ),
@@ -322,7 +331,7 @@ class _ChartsWidgetState extends State<DashboardScreen> {
                             Column(
                               children: [
                                 Text(
-                                  "30",
+                                  '${stats.selfStudyHoursPerWeek + stats.hoursPerWeek}',
                                   style: TextStyle(
                                       fontSize: 100, color: Colors.white),
                                 ),

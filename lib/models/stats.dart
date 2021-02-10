@@ -1,3 +1,5 @@
+
+
 class Stats extends Object {
   final num subjectsCount;
   final num examsCount;
@@ -29,9 +31,14 @@ class Stats extends Object {
       classesPerWeek: json['classesPerWeek'],
       classesPerDay: json['classesPerDay'],
       classesToday: json['classesToday'],
-      hoursPerWeek: json['hoursPerWeek'],
-      selfStudyHoursPerWeek: json['selfStudyHoursPerWeek'],
+      hoursPerWeek: json['hoursPerWeek'].round(),
+      selfStudyHoursPerWeek: json['selfStudyHoursPerWeek'].round(),
       weeksUntilExams: json['weeksUntilExam'],
     );
+  }
+  
+  @override
+  String toString() {
+    return 'Stats: { subjectsCount: ${this.subjectsCount} ...}';
   }
 }
