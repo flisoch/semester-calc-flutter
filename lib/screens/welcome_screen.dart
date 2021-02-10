@@ -15,7 +15,7 @@ class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title: new Text('Semester calc'),
+        title: new Text('Мой семестр'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +54,7 @@ class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
-                child: new Text('Start'),
+                child: new Text('Начать'),
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
                       context, AppRoutes.home, (Route<dynamic> route) => false);

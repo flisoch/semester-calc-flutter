@@ -46,26 +46,26 @@ class SubjectWidgetState extends State<SubjectScreen> {
           context: context,
           tiles: [
             ListTile(
-              title: Text('Control form'),
+              title: Text('Форма контроля'),
               subtitle: subject.creditType == CreditType.EXAM
-                  ? Text('Exam')
-                  : Text('Credit'),
+                  ? Text('Экзамен')
+                  : Text('Зачёт'),
             ),
             ListTile(
               contentPadding: EdgeInsets.only(left: 20, right: 30),
-              title: Text('Syllabus'),
+              title: Text('Программа дисциплины'),
               subtitle: Text('${subject.syllabusLink}'),
               trailing: Icon(Icons.file_download),
               onTap: () => _launchInBrowser('${subject.syllabusLink}'),
             ),
             ListTile(
-              title: Text('Teachers'),
+              title: Text('Преподаватели'),
               subtitle: sameTeachers(subject)
                   ? _buildTeachers(subject, 1)
                   : _buildTeachers(subject, 2),
             ),
             ListTile(
-              title: Text('Hours load'),
+              title: Text('Нагрузка'),
               subtitle: _buildHours(subject),
 
             ),
@@ -91,7 +91,7 @@ class SubjectWidgetState extends State<SubjectScreen> {
       return ListTile(
         title:
             Text('${teacher.lastName} ${teacher.name} ${teacher.middleName}'),
-        subtitle: Text('Lecture & Seminar'),
+        subtitle: Text('Лекции и семинары'),
         trailing: Icon(Icons.arrow_forward),
         onTap: () => _launchInBrowser('${teacher.kpfuLink}'),
       );
@@ -106,14 +106,14 @@ class SubjectWidgetState extends State<SubjectScreen> {
         ListTile(
           title: Text(
               '${teacher1.lastName} ${teacher1.name} ${teacher1.middleName}'),
-          subtitle: Text('Lecture'),
+          subtitle: Text('Лекции'),
           trailing: Icon(Icons.arrow_forward),
           onTap: () => _launchInBrowser('${teacher1.kpfuLink}'),
         ),
         ListTile(
           title: Text(
               '${teacher2.lastName} ${teacher2.name} ${teacher2.middleName}'),
-          subtitle: Text('Seminar'),
+          subtitle: Text('Семинары'),
           trailing: Icon(Icons.arrow_forward),
           onTap: () => _launchInBrowser('${teacher1.kpfuLink}'),
         )
@@ -125,12 +125,12 @@ class SubjectWidgetState extends State<SubjectScreen> {
     Hours hours = subject.hours;
     return Column(children: [
       ListTile(
-        title: Text('in-house'),
-        subtitle: Text('${hours.school} h'),
+        title: Text('В университете'),
+        subtitle: Text('${hours.school} ч'),
       ),
       ListTile(
-        title: Text('self-study'),
-        subtitle: Text('${hours.selfStudy} h'),
+        title: Text('Самостоятельная'),
+        subtitle: Text('${hours.selfStudy} ч'),
       )
     ]);
   }

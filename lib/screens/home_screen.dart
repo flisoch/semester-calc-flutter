@@ -20,18 +20,18 @@ class _HomeWidgetState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Semester calc'),
+        title: Text('Мой семестр'),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard), label: 'Dashboard'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Charts'),
+              icon: Icon(Icons.dashboard), label: 'Дашборд'),
+          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Графики'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.library_books), label: 'Subjects'),
+              icon: Icon(Icons.library_books), label: 'Предметы'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: 'Settings'),
+              icon: Icon(Icons.settings), label: 'Настройки'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

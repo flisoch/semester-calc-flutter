@@ -46,7 +46,7 @@ class _ChartsWidgetState extends State<ChartsScreen> {
                           width: 38,
                         ),
                         const Text(
-                          'Classes count',
+                          'Количество пар',
                           style: TextStyle(color: Colors.white, fontSize: 22),
                         ),
                         const SizedBox(
@@ -95,19 +95,19 @@ class _ChartsWidgetState extends State<ChartsScreen> {
                                 getTitles: (double value) {
                                   switch (value.toInt()) {
                                     case 0:
-                                      return 'Mo';
+                                      return 'Пн';
                                     case 1:
-                                      return 'Tu';
+                                      return 'Вт';
                                     case 2:
-                                      return 'We';
+                                      return 'Ср';
                                     case 3:
-                                      return 'Th';
+                                      return 'Чт';
                                     case 4:
-                                      return 'Fr';
+                                      return 'Пт';
                                     case 5:
-                                      return 'Sa';
+                                      return 'Сб';
                                     case 6:
-                                      return 'Su';
+                                      return 'Вс';
                                     default:
                                       return '';
                                   }
@@ -206,7 +206,7 @@ class _ChartsWidgetState extends State<ChartsScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         new Text(
-                          '$studyHours h',
+                          '$studyHours ч',
                           style: TextStyle(fontSize: 36),
                         ),
                       ],
@@ -214,9 +214,16 @@ class _ChartsWidgetState extends State<ChartsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        new Text(
-                          '$selfStudyHours h self-study',
-                          style: TextStyle(fontSize: 12),
+                        Column(
+                          children: [
+                            new Text(
+                              '$selfStudyHours ч',
+                              style: TextStyle(fontSize: 12),
+                            ),new Text(
+                              'самостоятельно',
+                              style: TextStyle(fontSize: 10),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -245,7 +252,7 @@ class _ChartsWidgetState extends State<ChartsScreen> {
               ),
               CheckboxListTile(
                 activeColor: Colors.lightBlue,
-                title: const Text('Self-study'),
+                title: const Text('Самостоятельное обучение'),
                 value: checkboxes[1],
                 onChanged: (bool value) {
                   setState(() {
@@ -266,7 +273,7 @@ class _ChartsWidgetState extends State<ChartsScreen> {
               ),
               CheckboxListTile(
                 activeColor: Colors.lightBlue,
-                title: const Text('Self-study'),
+                title: const Text('Самостоятельное обучение'),
                 value: checkboxes[3],
                 onChanged: (bool value) {
                   setState(() {
@@ -287,7 +294,7 @@ class _ChartsWidgetState extends State<ChartsScreen> {
               ),
               CheckboxListTile(
                 activeColor: Colors.lightBlue,
-                title: const Text('Self-study'),
+                title: const Text('Самостоятельное обучение'),
                 value: checkboxes[5],
                 onChanged: (bool value) {
                   setState(() {
