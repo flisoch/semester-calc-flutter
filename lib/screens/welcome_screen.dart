@@ -2,14 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/routes.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  Function _saveGroup;
+
+  WelcomeScreen(this._saveGroup);
+
   @override
   State<StatefulWidget> createState() {
-    return _WelcomeScreenWidgetState();
+    return _WelcomeScreenWidgetState(_saveGroup);
   }
 }
 
 class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
-  String dropdownValue = '11-701';
+  String dropdownGroupValue = '11-701';
+  String finalGroupValue = '';
+  Function _saveGroup;
+
+  _WelcomeScreenWidgetState(Function _saveGroup) {
+    this._saveGroup = _saveGroup;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +40,7 @@ class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
                 children: [
                   Container(
                     child: DropdownButton<String>(
-                      value: dropdownValue,
+                      value: dropdownGroupValue,
                       icon: Icon(Icons.arrow_drop_down),
                       elevation: 16,
                       items: <String>['11-701', '11-702', '11-703']
@@ -41,7 +51,8 @@ class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
                         );
                       })).toList(),
                       onChanged: (groupNumber) => setState(() {
-                        dropdownValue = groupNumber;
+                        dropdownGroupValue = groupNumber;
+                        finalGroupValue = groupNumber;
                       }),
                     ),
                   ),
@@ -55,10 +66,7 @@ class _WelcomeScreenWidgetState extends State<WelcomeScreen> {
             children: [
               ElevatedButton(
                 child: new Text('Начать'),
-                onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, AppRoutes.home, (Route<dynamic> route) => false);
-                },
+                onPressed: _saveGroup(context, finalGroupValue),
               )
             ],
           ),

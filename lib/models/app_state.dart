@@ -19,7 +19,7 @@ class AppState {
   });
 
   factory AppState.initial() =>
-      AppState(isLoading: true, groupNumber: '11-701');
+      AppState(isLoading: true, groupNumber: '');
 
   AppState copyWith({
     bool isLoading,

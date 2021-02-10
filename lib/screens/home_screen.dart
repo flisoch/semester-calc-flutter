@@ -7,14 +7,34 @@ import 'charts_screen.dart';
 import 'dashboard_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  String groupNumber;
+  Function clearElectives;
+  Function changeGroup;
+
+  HomeScreen({
+    @required this.groupNumber,
+    @required this.clearElectives,
+    @required this.changeGroup,
+  });
+
   @override
   State<StatefulWidget> createState() {
-    return _HomeWidgetState();
+    return _HomeWidgetState(
+        this.groupNumber, this.changeGroup, this.clearElectives);
   }
 }
 
 class _HomeWidgetState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  String groupNumber;
+  Function clearElectives;
+  Function changeGroup;
+
+  _HomeWidgetState(String groupNumber, Function changeGroup,
+      Function clearElectives) {
+    this.groupNumber = groupNumber;
+    this.changeGroup = changeGroup;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +47,8 @@ class _HomeWidgetState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.dashboard), label: 'Дашборд'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Графики'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.bar_chart), label: 'Графики'),
           BottomNavigationBarItem(
               icon: Icon(Icons.library_books), label: 'Предметы'),
           BottomNavigationBarItem(
@@ -43,10 +64,10 @@ class _HomeWidgetState extends State<HomeScreen> {
           ChartsScreen(),
           SubjectsScreen(),
           SettingsScreen(
-            groupNumber: '11-701',
+            groupNumber: groupNumber,
             electives: List.of([Subject.fullDummy()]),
-            clearElectives: () => print('clearElectives!'),
-            changeGroup: () => print('clearGroup!'),
+            clearElectives: () => clearElectives,
+            changeGroup: () => changeGroup,
           ),
         ],
       ),
