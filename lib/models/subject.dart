@@ -7,6 +7,7 @@ import 'credit_type.dart';
 import 'hours.dart';
 
 class Subject extends Object {
+  final num id;
   final String name;
   final bool elective;
   final List<Subject> electives;
@@ -17,6 +18,7 @@ class Subject extends Object {
   final Hours hours;
 
   Subject({
+    this.id,
     this.electiveDescriptor,
     this.name,
     this.hours,
@@ -48,6 +50,7 @@ class Subject extends Object {
     List<Class> classes = [lecture, seminar];
     Hours hours = Hours.dummy();
     return Subject(
+      id: -1,
       name: "Интернет вещей",
       creditType: CreditType.EXAM,
       classes: classes,
@@ -61,11 +64,12 @@ class Subject extends Object {
     var hours = json['hours'];
     var creditType =
         json['creditType'] == 'CREDIT' ? CreditType.CREDIT : CreditType.EXAM;
-    var electiveDescriptor = json['electiveDescriptor'] == null
+    var electiveDescriptor = json['descriptor'] == null
         ? ElectiveDescriptor()
-        : ElectiveDescriptor.fromJson(json['electiveDescriptor']);
+        : ElectiveDescriptor.fromJson(json['descriptor']);
 
     return Subject(
+      id: json['id'],
       name: json['name'],
       syllabusLink: json['syllabus'] ??
           "https://kpfu.ru/itis/obuchenie-v-itis/osnovnye-obrazovatelnye-programmy",

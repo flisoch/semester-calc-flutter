@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/models/credit_type.dart';
-import 'package:semester_calc_flutter/models/hours.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/repository/subjects_repository.dart';
 import 'package:semester_calc_flutter/routes.dart';
-import 'package:http/http.dart' as http;
 
 class SubjectsScreen extends StatefulWidget {
   @override
@@ -16,122 +12,118 @@ class SubjectsScreen extends StatefulWidget {
 }
 
 class _SubjectsWidgetState extends State<SubjectsScreen> {
-  List<Subject> _subjects = <Subject>[
-    Subject(
-        name: 'Дисциплина по выбору',
-        hours: Hours.dummy(),
-        creditType: CreditType.EXAM,
-        elective: true,
-        electives: [
-          Subject.fullDummy(),
-          Subject(
-              name: 'Проектирование человеко-машинных интерфейсов',
-              creditType: CreditType.EXAM,
-              hours: Hours.dummy()),
-        ]),
-    Subject(name: 'Методология научных исследований', hours: Hours.dummy()),
-    Subject(name: 'основы информационного поиска', hours: Hours.dummy())
-  ];
-  String _selectedElective = "";
-
-  Future<List<Subject>> subjects;
+  List<Subject> _subjects;
   final _subjectsRepository = SubjectsRepository();
-
+  Future<List<Subject>> _futureSubjects;
+  List<num> _selectedElective = [];
+  List<bool> _hiddenTiles = [];
   @override
   void initState() {
+    _futureSubjects = loadSubjects();
     super.initState();
   }
+
+  Future<List<Subject>> loadSubjects() async {
+    return _subjectsRepository.loadSubjects('11-701');
+  }
+
   @override
   Widget build(BuildContext context) {
-
     //todo: rebuild, electives are subjects with descriptor, group electives with same descriptor
     return FutureBuilder(
-        future: loadSubjects(),
+        future: _futureSubjects,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             _subjects = snapshot.data as List<Subject>;
-            List<Subject> electives;
-            List<Subject> notElectives;
-            Map<num, Subject> groupedElectives = Map();
-            electives =
-                _subjects.where((element) => element.elective).toList();
-            notElectives =
-                _subjects.where((element) => !element.elective).toList();
-            electives.forEach((element) {
-              num descrId = element.electiveDescriptor.id;
-              var oldId = groupedElectives.keys.firstWhere((element) =>
-              element == descrId, orElse: () {
-                groupedElectives.putIfAbsent(descrId, () => element);
-              },);
-              if (oldId != null) {
-                groupedElectives.putIfAbsent(oldId, () => element);
-              }
-            });
+            List<Subject> electives = getElectives(_subjects);
+            List<Subject> notElectives = getNotElectives(_subjects);
+            Map<num, List<Subject>> groupedElectives =
+                groupElectives(electives);
+            num itemsCount = notElectives.length + groupedElectives.length;
+            for (int i = 0; i < itemsCount; i++) {
+              _hiddenTiles.add(false);
+              _selectedElective.add(-1);
+            }
             return ListView.builder(
                 padding: EdgeInsets.all(8),
-                itemCount: _subjects.length,
+                itemCount: itemsCount,
                 itemBuilder: (BuildContext context, num index) {
-                  Subject subject = _subjects[index];
-                  return subject.elective
-                      ? ListTile(
-                    contentPadding: EdgeInsets.only(left: 5),
-                    title: Text('${subject.name}'),
-                    leading: subject.creditType == CreditType.CREDIT
-                        ? Icon(
-                      Icons.assistant_photo,
-                      color: Colors.lightBlue,
-                    )
-                        : Icon(
-                      Icons.assistant_photo,
-                      color: Colors.green,
-                    ),
-                    subtitle: Column(
-                      children: _buildElectives(subject),
-                    ),
-                  )
-                      : ListTile(
-                    contentPadding: EdgeInsets.only(left: 5),
-                    leading: subject.creditType == CreditType.CREDIT
-                        ? Icon(
-                      Icons.assistant_photo,
-                      color: Colors.lightBlue,
-                    )
-                        : Icon(
-                      Icons.assistant_photo,
-                      color: Colors.green,
-                    ),
-                    title: Text('${subject.name}'),
-                    onTap: () {
-                      Navigator.pushNamed(context, AppRoutes.subject,
-                          arguments: subject);
-                    },
-                  );
+                  if (index >= notElectives.length) {
+                    // build electives
+                    num idx = index - notElectives.length;
+                    List<Subject> es = groupedElectives[idx + 1];
+                    var first = es.elementAt(0);
+                    return ListTile(
+                      onTap: () {
+                        setState(() {
+                          _hiddenTiles[index] = !_hiddenTiles[index];
+                        });
+                      },
+                        contentPadding: EdgeInsets.only(left: 5),
+                        title: Text('${first.electiveDescriptor.name}'),
+                        leading: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            first.creditType == CreditType.CREDIT
+                                ? Icon(
+                                    Icons.assistant_photo,
+                                    color: Colors.lightBlue,
+                                  )
+                                : Icon(
+                                    Icons.assistant_photo,
+                                    color: Colors.green,
+                                  ),
+                          ],
+                        ),
+                        trailing: Icon(Icons.arrow_drop_down),
+                        subtitle: _hiddenTiles[index] ? Column(
+                          children: _buildElectives(es, index),
+                        ) : SizedBox.shrink());
+                  } else {
+                    // build not electives
+                    Subject subject = notElectives[index];
+                    return ListTile(
+                      contentPadding: EdgeInsets.only(left: 5),
+                      leading: subject.creditType == CreditType.CREDIT
+                          ? Icon(
+                              Icons.assistant_photo,
+                              color: Colors.lightBlue,
+                            )
+                          : Icon(
+                              Icons.assistant_photo,
+                              color: Colors.green,
+                            ),
+                      title: Text('${subject.name}'),
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.subject,
+                            arguments: subject);
+                      },
+                    );
+                  }
                 });
+          } else {
+            return Center(child: CircularProgressIndicator());
           }
-          else {
-            return CircularProgressIndicator();
-          }
-        }
-    );
+        });
   }
 
-  _buildElectives(Subject subject) {
+  _buildElectives(List<Subject> es, num index) {
     List<Widget> electives = <Widget>[];
-    subject.electives.forEach((element) {
+    es.forEach((element) {
       electives.add(ListTile(
         title: Text(
           element.name,
           style: TextStyle(
-              color: element.name == _selectedElective
+              color: element.id == _selectedElective[index]
                   ? Colors.black
                   : Colors.black38),
         ),
-        trailing: Radio(
-          value: element.name,
-          groupValue: _selectedElective,
-          onChanged: (String value) {
+        trailing: Radio<num>(
+          value: element.id,
+          groupValue: _selectedElective[index],
+          onChanged: (num value) {
             setState(() {
-              _selectedElective = value;
+              _selectedElective[index] = value;
             });
           },
         ),
@@ -143,7 +135,30 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
     return electives;
   }
 
-  Future<List<Subject>> loadSubjects() async {
-    return _subjectsRepository.loadSubjects('11-701');
+  List<Subject> getElectives(List<Subject> subjects) {
+    return subjects.where((element) => element.elective).toList();
+  }
+
+  List<Subject> getNotElectives(List<Subject> subjects) {
+    return subjects.where((element) => !element.elective).toList();
+  }
+
+  Map<num, List<Subject>> groupElectives(List<Subject> electives) {
+    Map<num, List<Subject>> groupedElectives = Map();
+    electives.forEach((element) {
+      num descrId = element.electiveDescriptor.id;
+      var oldId = groupedElectives.keys.firstWhere(
+        (element) => element == descrId,
+        orElse: () {
+          groupedElectives[descrId] = List.of([element]);
+        },
+      );
+      if (oldId != null) {
+        var s = groupedElectives[oldId];
+        s.add(element);
+        groupedElectives[oldId] = s;
+      }
+    });
+    return groupedElectives;
   }
 }
