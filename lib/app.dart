@@ -40,12 +40,6 @@ class App extends StatelessWidget {
         navigatorKey: navigatorKey,
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) => _getRoute(settings),
-        // routes: {
-        //   AppRoutes.home: (context) => HomeStoreConnector(),
-        //   AppRoutes.startPage: (context) => ChooseGroupConnector(),
-        //   AppRoutes.subject: (context) =>
-        //       SubjectScreen(ModalRoute.of(context).settings.arguments),
-        // },
       ),
     );
   }

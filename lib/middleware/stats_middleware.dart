@@ -15,11 +15,13 @@ List<Middleware<AppState>> createStatsMiddleware(
     new LoggingMiddleware.printer(formatter: logStateFormatter),
   ];
 }
+
 String logStateFormatter<State>(
     AppState state, dynamic action, DateTime timestamp) {
   Stats stats = state.stats;
   bool isLoading = state.isLoading;
-  return "{Action: $action, State: {Stats: $stats, IsLoading: $isLoading}, ts: $timestamp}";
+  String groupNumber = state.groupNumber;
+  return "{Action: $action, State: {Stats: $stats, IsLoading: $isLoading, groupNumber: $groupNumber}, ts: $timestamp}";
 }
 
 _loadStats(DashboardRepository repository) {
@@ -28,6 +30,5 @@ _loadStats(DashboardRepository repository) {
     repository.loadStats(action.groupNumber).then((stats) {
       return store.dispatch(StatsLoadedAction(stats));
     }).catchError((_) => store.dispatch(StatsNotLoadedAction()));
-
   };
 }

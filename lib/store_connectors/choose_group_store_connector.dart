@@ -28,7 +28,7 @@ class ChooseGroupViewModel {
     return ChooseGroupViewModel(
       saveGroup: (BuildContext context, String groupNUmber) {
         store.dispatch(SaveGroupNumberAction(groupNUmber));
-        store.dispatch(NavigatePushAction(AppRoutes.home));
+        store.dispatch(NavigateReplaceAction(AppRoutes.home));
 
       },
     );
