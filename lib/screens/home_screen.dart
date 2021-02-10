@@ -46,7 +46,7 @@ class _HomeWidgetState extends State<HomeScreen> {
             groupNumber: '11-701',
             electives: List.of([Subject.fullDummy()]),
             clearElectives: () => print('clearElectives!'),
-            clearGroup: () => print('clearGroup!'),
+            changeGroup: () => print('clearGroup!'),
           ),
         ],
       ),

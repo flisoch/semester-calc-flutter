@@ -52,7 +52,7 @@ class SubjectWidgetState extends State<SubjectScreen> {
                   : Text('Зачёт'),
             ),
             ListTile(
-              contentPadding: EdgeInsets.only(left: 20, right: 30),
+              contentPadding: EdgeInsets.only(left: 15, right: 33),
               title: Text('Программа дисциплины'),
               subtitle: Text('${subject.syllabusLink}'),
               trailing: Icon(Icons.file_download),

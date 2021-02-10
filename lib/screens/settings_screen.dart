@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 
+import '../routes.dart';
+
 class SettingsScreen extends StatelessWidget {
   final String groupNumber;
   final List<Subject> electives;
   final Function clearElectives;
-  final Function clearGroup;
+  final Function changeGroup;
 
   SettingsScreen({
     @required this.groupNumber,
     @required this.electives,
     @required this.clearElectives,
-    @required this.clearGroup,
+    @required this.changeGroup,
   });
 
   @override
@@ -19,16 +21,19 @@ class SettingsScreen extends StatelessWidget {
     return ListView(
       children: ListTile.divideTiles(context: context, tiles: [
         ListTile(
-          title: Text('Очистить выбор группы'),
+          contentPadding: EdgeInsets.only(left: 15, right: 28),
+          title: Text('Выбрать группу'),
           subtitle: Text('$groupNumber'),
-          trailing: Icon(Icons.delete_outline),
-          onTap: clearGroup,
+          trailing: Icon(Icons.subject),
+          onTap: changeGroup,
         ),
         ListTile(
-          title: Text('Очистить выбранные элективы'),
+          title: Text('Выбранные элективы'),
           subtitle: _buildElectives(electives),
-          trailing: Icon(Icons.delete_outline),
-          onTap: clearElectives,
+          trailing: IconButton(
+            icon: Icon(Icons.delete_outline),
+            onPressed: clearElectives,
+          ),
         ),
         ListTile(
           title: Text('Google Calendar'),
@@ -49,6 +54,7 @@ class SettingsScreen extends StatelessWidget {
       Widget tile = ListTile(
         title: Text('${element.electiveDescriptor.name}'),
         subtitle: Text('${element.name}'),
+
       );
       electivesTiles.add(tile);
     });
