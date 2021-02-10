@@ -5,6 +5,9 @@ final loadingReducer = combineReducers<bool>([
   TypedReducer<bool, StatsLoadedAction>(_setLoaded),
   TypedReducer<bool, StatsNotLoadedAction>(_setLoaded),
   TypedReducer<bool, LoadStatsAction>(_setLoading),
+  TypedReducer<bool, SubjectsLoadedAction>(_setLoaded),
+  TypedReducer<bool, SubjectsNotLoadedAction>(_setLoaded),
+  TypedReducer<bool, LoadSubjectsAction>(_setLoading),
   // TypedReducer<bool, RefreshDevicesScreenAction>(_setLoading),
 ]);
 

@@ -1,4 +1,5 @@
 import 'package:semester_calc_flutter/models/stats.dart';
+import 'package:semester_calc_flutter/models/subject.dart';
 
 class ClearGroupNumberAction {}
 
@@ -23,6 +24,31 @@ class StatsLoadedAction {
   @override
   String toString() {
     return 'StatsLoadedAction{stats: $stats}';
+  }
+}
+
+class LoadSubjectsAction {
+  final String groupNumber;
+
+  LoadSubjectsAction(this.groupNumber);
+
+  @override
+  String toString() {
+    return 'LoadSubjectsAction{groupNUmber: $groupNumber}';
+  }
+}
+
+class SubjectsNotLoadedAction {}
+
+class SubjectsLoadedAction {
+  final List<Subject> subjects;
+
+  SubjectsLoadedAction(this.subjects);
+
+  @override
+  String toString() {
+
+    return 'SubjectsLoadedAction{subjects: {IsNull:${subjects == null}}';
   }
 }
 

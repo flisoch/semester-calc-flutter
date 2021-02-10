@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 
 class DashboardRepository {
   String host = 'http://192.168.1.167:8080';
-  @override
+
   Future<Stats> loadStats(String groupNumber) async {
 
     final response =

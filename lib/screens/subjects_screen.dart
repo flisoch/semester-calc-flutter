@@ -1,108 +1,93 @@
 import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/models/credit_type.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
-import 'package:semester_calc_flutter/repository/subjects_repository.dart';
 import 'package:semester_calc_flutter/routes.dart';
 
 class SubjectsScreen extends StatefulWidget {
+  final List<Subject> subjects;
+
+  const SubjectsScreen({Key key, this.subjects}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
-    return _SubjectsWidgetState();
+    return _SubjectsWidgetState(subjects: subjects);
   }
 }
 
 class _SubjectsWidgetState extends State<SubjectsScreen> {
-  List<Subject> _subjects;
-  final _subjectsRepository = SubjectsRepository();
-  Future<List<Subject>> _futureSubjects;
+  final List<Subject> subjects;
   List<num> _selectedElective = [];
   List<bool> _hiddenTiles = [];
-  @override
-  void initState() {
-    _futureSubjects = loadSubjects();
-    super.initState();
-  }
 
-  Future<List<Subject>> loadSubjects() async {
-    return _subjectsRepository.loadSubjects('11-701');
-  }
+  _SubjectsWidgetState({this.subjects});
 
   @override
   Widget build(BuildContext context) {
-    //todo: rebuild, electives are subjects with descriptor, group electives with same descriptor
-    return FutureBuilder(
-        future: _futureSubjects,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            _subjects = snapshot.data as List<Subject>;
-            List<Subject> electives = getElectives(_subjects);
-            List<Subject> notElectives = getNotElectives(_subjects);
-            Map<num, List<Subject>> groupedElectives =
-                groupElectives(electives);
-            num itemsCount = notElectives.length + groupedElectives.length;
-            for (int i = 0; i < itemsCount; i++) {
-              _hiddenTiles.add(false);
-              _selectedElective.add(-1);
-            }
-            return ListView.builder(
-                padding: EdgeInsets.all(8),
-                itemCount: itemsCount,
-                itemBuilder: (BuildContext context, num index) {
-                  if (index >= notElectives.length) {
-                    // build electives
-                    num idx = index - notElectives.length;
-                    List<Subject> es = groupedElectives[idx + 1];
-                    var first = es.elementAt(0);
-                    return ListTile(
-                      onTap: () {
-                        setState(() {
-                          _hiddenTiles[index] = !_hiddenTiles[index];
-                        });
-                      },
-                        contentPadding: EdgeInsets.only(left: 5),
-                        title: Text('${first.electiveDescriptor.name}'),
-                        leading: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            first.creditType == CreditType.CREDIT
-                                ? Icon(
-                                    Icons.assistant_photo,
-                                    color: Colors.lightBlue,
-                                  )
-                                : Icon(
-                                    Icons.assistant_photo,
-                                    color: Colors.green,
-                                  ),
-                          ],
-                        ),
-                        trailing: Icon(Icons.arrow_drop_down),
-                        subtitle: _hiddenTiles[index] ? Column(
-                          children: _buildElectives(es, index),
-                        ) : SizedBox.shrink());
-                  } else {
-                    // build not electives
-                    Subject subject = notElectives[index];
-                    return ListTile(
-                      contentPadding: EdgeInsets.only(left: 5),
-                      leading: subject.creditType == CreditType.CREDIT
-                          ? Icon(
-                              Icons.assistant_photo,
-                              color: Colors.lightBlue,
-                            )
-                          : Icon(
-                              Icons.assistant_photo,
-                              color: Colors.green,
-                            ),
-                      title: Text('${subject.name}'),
-                      onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.subject,
-                            arguments: subject);
-                      },
-                    );
-                  }
-                });
+    List<Subject> electives = getElectives(subjects);
+    List<Subject> notElectives = getNotElectives(subjects);
+    Map<num, List<Subject>> groupedElectives = groupElectives(electives);
+    num itemsCount = notElectives.length + groupedElectives.length;
+    for (int i = 0; i < itemsCount; i++) {
+      _hiddenTiles.add(false);
+      _selectedElective.add(-1);
+    }
+    return ListView.builder(
+        padding: EdgeInsets.all(8),
+        itemCount: itemsCount,
+        itemBuilder: (BuildContext context, num index) {
+          if (index >= notElectives.length) {
+            // build electives
+            num idx = index - notElectives.length;
+            List<Subject> es = groupedElectives[idx + 1];
+            var first = es.elementAt(0);
+            return ListTile(
+                onTap: () {
+                  setState(() {
+                    _hiddenTiles[index] = !_hiddenTiles[index];
+                  });
+                },
+                contentPadding: EdgeInsets.only(left: 5),
+                title: Text('${first.electiveDescriptor.name}'),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    first.creditType == CreditType.CREDIT
+                        ? Icon(
+                            Icons.assistant_photo,
+                            color: Colors.lightBlue,
+                          )
+                        : Icon(
+                            Icons.assistant_photo,
+                            color: Colors.green,
+                          ),
+                  ],
+                ),
+                trailing: Icon(Icons.arrow_drop_down),
+                subtitle: _hiddenTiles[index]
+                    ? Column(
+                        children: _buildElectives(es, index),
+                      )
+                    : SizedBox.shrink());
           } else {
-            return Center(child: CircularProgressIndicator());
+            // build not electives
+            Subject subject = notElectives[index];
+            return ListTile(
+              contentPadding: EdgeInsets.only(left: 5),
+              leading: subject.creditType == CreditType.CREDIT
+                  ? Icon(
+                      Icons.assistant_photo,
+                      color: Colors.lightBlue,
+                    )
+                  : Icon(
+                      Icons.assistant_photo,
+                      color: Colors.green,
+                    ),
+              title: Text('${subject.name}'),
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.subject,
+                    arguments: subject);
+              },
+            );
           }
         });
   }

@@ -11,7 +11,5 @@ String _setGroupNumber(String prevGroupNumber, action) {
 }
 
 String _setNoGroupNumber(String prevGroupNumber, action) {
-  print(prevGroupNumber);
-  print(action);
   return '';
 }

@@ -3,6 +3,7 @@ import 'package:redux_logging/redux_logging.dart';
 import 'package:semester_calc_flutter/actions/actions.dart';
 import 'package:semester_calc_flutter/models/app_state.dart';
 import 'package:semester_calc_flutter/models/stats.dart';
+import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/repository/dashboard_repository.dart';
 
 List<Middleware<AppState>> createStatsMiddleware(
@@ -21,7 +22,9 @@ String logStateFormatter<State>(
   Stats stats = state.stats;
   bool isLoading = state.isLoading;
   String groupNumber = state.groupNumber;
-  return "{Action: $action, State: {Stats: $stats, IsLoading: $isLoading, groupNumber: $groupNumber}, ts: $timestamp}";
+  List<Subject> subjects = state.groupSubjects;
+  return "{Action: $action, State: {Stats: $stats, IsLoading: $isLoading,"
+      " groupNumber: $groupNumber, subjects: {IsNull: ${subjects == null}}, ts: $timestamp}";
 }
 
 _loadStats(DashboardRepository repository) {

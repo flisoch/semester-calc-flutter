@@ -6,7 +6,8 @@ import 'package:semester_calc_flutter/route_aware_widget.dart';
 import 'package:semester_calc_flutter/routes.dart';
 import 'package:semester_calc_flutter/screens/subject_screen.dart';
 import 'package:semester_calc_flutter/store_connectors/choose_group_store_connector.dart';
-import 'package:semester_calc_flutter/store_connectors/home_store_connector.dart';
+import 'package:semester_calc_flutter/store_connectors/dashboard_store_connector.dart';
+import 'package:semester_calc_flutter/store_connectors/subjects_store_connector.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
@@ -17,15 +18,19 @@ class App extends StatelessWidget {
 
   MaterialPageRoute _getRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppRoutes.home:
-        return MaterialPageRoute(builder: (BuildContext context) => HomeStoreConnector());
       case AppRoutes.startPage:
-        return MaterialPageRoute(builder: (BuildContext context) => ChooseGroupConnector());
+        return MainRoute(ChooseGroupConnector(), settings: settings);
+      case AppRoutes.dashboard:
+        return MainRoute(DashboardStoreConnector(), settings: settings);
+      case AppRoutes.subjects:
+        return MainRoute(SubjectsStoreConnector(), settings: settings);
       case AppRoutes.subject:
-        return MaterialPageRoute(builder: (BuildContext context) => SubjectScreen(ModalRoute.of(context).settings.arguments));
+        return MainRoute(SubjectScreen(settings.arguments));
+      // case AppRoutes.settings:
+      //   return MainRoute(SettingsScreen(), settings: settings);
 
       default:
-        return MaterialPageRoute(builder: (BuildContext context) => HomeStoreConnector());
+        return MainRoute(DashboardStoreConnector(), settings: settings);
     }
   }
 
@@ -36,11 +41,31 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: 'Semester load calc',
         theme: new ThemeData(primarySwatch: Colors.green),
-        initialRoute: AppRoutes.home,
+        initialRoute: AppRoutes.startPage,
         navigatorKey: navigatorKey,
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) => _getRoute(settings),
       ),
     );
+  }
+}
+
+class MainRoute<T> extends MaterialPageRoute<T> {
+  MainRoute(Widget widget, {RouteSettings settings})
+      : super(
+            builder: (_) => RouteAwareWidget(child: widget),
+            settings: settings);
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    if (settings.name == '/') {
+      return child;
+    }
+    ;
+    // Fades between routes. (If you don't want any animation,
+    // just return child.)
+    // return FadeTransition(opacity: animation, child: child);
+    return child;
   }
 }

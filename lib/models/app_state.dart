@@ -6,6 +6,7 @@ import 'package:semester_calc_flutter/routes.dart';
 @immutable
 class AppState {
   final bool isLoading;
+  final bool isLoadingSubjects;
   final String groupNumber;
   final Stats stats;
   final List<Subject> groupSubjects;
@@ -14,6 +15,7 @@ class AppState {
 
   AppState({
     this.isLoading = false,
+    this.isLoadingSubjects = false,
     this.groupNumber,
     this.electives,
     this.groupSubjects,
