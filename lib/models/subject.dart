@@ -64,10 +64,9 @@ class Subject extends Object {
       name: json['name'],
       syllabusLink: json['syllabus'] ??
           "https://kpfu.ru/itis/obuchenie-v-itis/osnovnye-obrazovatelnye-programmy",
-      //todo: practice  hours change to sum of all school hours
       hours: Hours(
           id: hours['id'],
-          school: hours['practice'],
+          school: hours['school'],
           selfStudy: hours['selfDependant']),
       creditType: creditType,
       //todo: make backend and frontend elective mark consistent

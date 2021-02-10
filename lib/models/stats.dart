@@ -6,6 +6,7 @@ class Stats extends Object {
   final num classesPerDay;
   final num classesToday;
   final num hoursPerWeek;
+  final num selfStudyHoursPerWeek;
   final num weeksUntilExams;
 
   Stats({
@@ -16,6 +17,21 @@ class Stats extends Object {
     this.classesPerDay,
     this.classesToday,
     this.hoursPerWeek,
+    this.selfStudyHoursPerWeek,
     this.weeksUntilExams,
   });
+
+  factory Stats.fromJson(Map<String, dynamic> json) {
+    return Stats(
+      subjectsCount: json['subjectsCount'],
+      examsCount: json['examsCount'],
+      creditsCount: json['creditsCount'],
+      classesPerWeek: json['classesPerWeek'],
+      classesPerDay: json['classesPerDay'],
+      classesToday: json['classesToday'],
+      hoursPerWeek: json['hoursPerWeek'],
+      selfStudyHoursPerWeek: json['selfStudyHoursPerWeek'],
+      weeksUntilExams: json['weeksUntilExam'],
+    );
+  }
 }
