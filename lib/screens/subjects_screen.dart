@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/models/credit_type.dart';
 import 'package:semester_calc_flutter/models/hours.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/routes.dart';
+import 'package:http/http.dart' as http;
 
 class SubjectsScreen extends StatefulWidget {
   @override
@@ -28,8 +31,37 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
     Subject(name: 'Методология научных исследований', hours: Hours.dummy()),
     Subject(name: 'основы информационного поиска', hours: Hours.dummy())
   ];
-
   String _selectedElective = "";
+
+  Future<List<Subject>> subjects;
+
+  @override
+  void initState() {
+    super.initState();
+    subjects = fetchSubjects();
+  }
+
+  Future<List<Subject>> fetchSubjects() async {
+    //todo: take group Number from reduxStore
+    final response =
+        await http.get('http://192.168.1.167:8080/api/subjects?groupNumber=11-701');
+    List<Subject> subjects = [];
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      subjects = (jsonDecode(utf8.decode(response.bodyBytes)) as List)
+          .map((i) => Subject.fromJson(i))
+          .toList();
+      subjects.forEach((element) {
+        print(element.name);
+      });
+      return subjects;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

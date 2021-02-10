@@ -55,4 +55,23 @@ class Subject extends Object {
       electiveDescriptor: Subject(name: 'Предмет по выбору'),
     );
   }
+
+  factory Subject.fromJson(Map<String, dynamic> json) {
+    var hours = json['hours'];
+    var creditType =
+        json['creditType'] == 'CREDIT' ? CreditType.CREDIT : CreditType.EXAM;
+    return Subject(
+      name: json['name'],
+      syllabusLink: json['syllabus'] ??
+          "https://kpfu.ru/itis/obuchenie-v-itis/osnovnye-obrazovatelnye-programmy",
+      //todo: practice  hours change to sum of all school hours
+      hours: Hours(
+          id: hours['id'],
+          school: hours['practice'],
+          selfStudy: hours['selfDependant']),
+      creditType: creditType,
+      //todo: make backend and frontend elective mark consistent
+      elective: !json['elective'],
+    );
+  }
 }
