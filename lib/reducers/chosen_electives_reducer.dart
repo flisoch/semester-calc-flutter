@@ -1,20 +1,27 @@
 import 'package:redux/redux.dart';
 import 'package:semester_calc_flutter/actions/actions.dart';
-import 'package:semester_calc_flutter/models/elective_descriptor.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 
-final electivesReducer = combineReducers<Map<ElectiveDescriptor,Subject>>([
-  TypedReducer<Map<ElectiveDescriptor,Subject>, ChooseElectivesAction>(_setChosenElectives),
-  TypedReducer<Map<ElectiveDescriptor,Subject>, ClearElectiveAction>(_setNoElectives),
+final electivesReducer = combineReducers<Map<num,Subject>>([
+  TypedReducer<Map<num,Subject>, ChooseElectiveAction>(_setChosenElectives),
+  TypedReducer<Map<num,Subject>, ClearElectiveAction>(_setNoElectives),
 ]);
 
 
-Map<ElectiveDescriptor,Subject> _setChosenElectives(
-    Map<ElectiveDescriptor,Subject> electives, ChooseElectivesAction action) {
-  return action.electives;
+Map<num,Subject> _setChosenElectives(
+    Map<num,Subject> electives, ChooseElectiveAction action) {
+  var electiveDescriptorId = action.electiveDescriptorId;
+
+  if (electives[electiveDescriptorId] != null) {
+    electives.update(electiveDescriptorId, (value) => action.chosenElective);
+  }
+  else {
+    electives[electiveDescriptorId] = action.chosenElective;
+  }
+  return electives;
 }
 
-Map<ElectiveDescriptor,Subject> _setNoElectives(
-    Map<ElectiveDescriptor,Subject> subjects, ClearElectiveAction action) {
+Map<num,Subject> _setNoElectives(
+    Map<num,Subject> subjects, ClearElectiveAction action) {
   return null;
 }

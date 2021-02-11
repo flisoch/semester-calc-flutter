@@ -9,7 +9,7 @@ import 'current_subject_reducer.dart';
 import 'navigation_reducer.dart';
 
 AppState appReducer(AppState state, action) {
-  return AppState(
+  return state.copyWith(
     route: navigationReducer(state.route, action),
     groupNumber: groupNumberReducer(state.groupNumber, action),
     stats: statsReducer(state.stats, action),

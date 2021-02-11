@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:semester_calc_flutter/models/calendar_event.dart';
 import 'package:semester_calc_flutter/models/class.dart';
 import 'package:semester_calc_flutter/models/elective_descriptor.dart';
@@ -70,18 +71,29 @@ class Subject extends Object {
     var classesJson = json['classes'] as List;
     var classes = classesJson.map((e) => Class.fromJson(e)).toList();
     return Subject(
-      id: json['id'],
-      name: json['name'],
-      syllabusLink: json['syllabus'] ??
-          "https://kpfu.ru/itis/obuchenie-v-itis/osnovnye-obrazovatelnye-programmy",
-      hours: Hours(
-          id: hours['id'],
-          school: hours['school'],
-          selfStudy: hours['selfStudy']),
-      creditType: creditType,
-      elective: json['elective'],
-      electiveDescriptor: electiveDescriptor,
-      classes: classes
-    );
+        id: json['id'],
+        name: json['name'],
+        syllabusLink: json['syllabus'] ??
+            "https://kpfu.ru/itis/obuchenie-v-itis/osnovnye-obrazovatelnye-programmy",
+        hours: Hours(
+            id: hours['id'],
+            school: hours['school'],
+            selfStudy: hours['selfStudy']),
+        creditType: creditType,
+        elective: json['elective'],
+        electiveDescriptor: electiveDescriptor,
+        classes: classes);
   }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is Subject &&
+            runtimeType == other.runtimeType &&
+            other.id == id &&
+            other.name == name;
+  }
+
+  @override
+  int get hashCode => hashValues(id, name);
 }

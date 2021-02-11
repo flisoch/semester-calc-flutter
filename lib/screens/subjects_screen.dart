@@ -4,25 +4,30 @@ import 'package:semester_calc_flutter/actions/actions.dart';
 import 'package:semester_calc_flutter/models/app_state.dart';
 import 'package:semester_calc_flutter/models/credit_type.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
-import 'package:semester_calc_flutter/routes.dart';
 
 class SubjectsScreen extends StatefulWidget {
   final List<Subject> subjects;
+  final Map<num, Subject> chosenElectives;
 
-  const SubjectsScreen({Key key, this.subjects}) : super(key: key);
+  const SubjectsScreen({Key key, this.subjects, this.chosenElectives})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _SubjectsWidgetState(subjects: subjects);
+    return _SubjectsWidgetState(
+        subjects: subjects, chosenElectives: chosenElectives);
   }
 }
 
 class _SubjectsWidgetState extends State<SubjectsScreen> {
   final List<Subject> subjects;
+  final Map<num, Subject> chosenElectives;
+
   List<num> _selectedElective = [];
+
   List<bool> _hiddenTiles = [];
 
-  _SubjectsWidgetState({this.subjects});
+  _SubjectsWidgetState({this.subjects, this.chosenElectives});
 
   @override
   Widget build(BuildContext context) {
@@ -98,20 +103,24 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
   _buildElectives(List<Subject> es, num index) {
     List<Widget> electives = <Widget>[];
     es.forEach((element) {
-      electives.add(ListTile(
+      print(chosenElectives.containsKey(element.id));
+      var listTile = ListTile(
         title: Text(
           element.name,
           style: TextStyle(
-              color: element.id == _selectedElective[index]
+              color: chosenElectives.containsValue(element)
                   ? Colors.black
                   : Colors.black38),
         ),
         trailing: Radio<num>(
           value: element.id,
-          groupValue: _selectedElective[index],
+          groupValue:
+          chosenElectives.containsValue(element) ? element.id : -1,
           onChanged: (num value) {
             setState(() {
-              _selectedElective[index] = value;
+              // _selectedElective[index] = value;
+              StoreProvider.of<AppState>(context).dispatch(
+                  ChooseElectiveAction(index, element));
             });
           },
         ),
@@ -119,7 +128,8 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
           StoreProvider.of<AppState>(context)
               .dispatch(WatchSubjectAction(element));
         },
-      ));
+      );
+      electives.add(listTile);
     });
     return electives;
   }

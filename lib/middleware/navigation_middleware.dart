@@ -9,7 +9,8 @@ List<Middleware<AppState>> createNavigationMiddleware() {
   return [
     TypedMiddleware<AppState, NavigateReplaceAction>(_navigateReplace),
     TypedMiddleware<AppState, NavigatePushAction>(_navigate),
-    TypedMiddleware<AppState, WatchSubjectAction>(_navigateTo),
+    TypedMiddleware<AppState, WatchSubjectAction>(_navigateToSubject),
+    // TypedMiddleware<AppState, ChooseElectiveAction>(_navigateToGraph),
 
   ];
 }
@@ -30,10 +31,18 @@ _navigate(Store<AppState> store, action, NextDispatcher next) {
   next(action); //This need to be after name checks
 }
 
-_navigateTo(Store<AppState> store, action, NextDispatcher next) {
+_navigateToSubject(Store<AppState> store, action, NextDispatcher next) {
   final routeName = AppRoutes.subject;
   if (store.state.route.last != routeName) {
     navigatorKey.currentState.pushNamed(routeName);
   }
   next(action); //This need to be after name checks
 }
+
+// _navigateToGraph(Store<AppState> store, ChooseElectiveAction action, NextDispatcher next) {
+//   final routeName = AppRoutes.graphs;
+//   if (store.state.route.last != routeName) {
+//     navigatorKey.currentState.pushNamed(routeName);
+//   }
+//   next(action);
+// }

@@ -1,5 +1,4 @@
 import 'package:meta/meta.dart';
-import 'package:semester_calc_flutter/models/elective_descriptor.dart';
 import 'package:semester_calc_flutter/models/stats.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/routes.dart';
@@ -10,7 +9,7 @@ class AppState {
   final String groupNumber;
   final Stats stats;
   final List<Subject> groupSubjects;
-  final Map<ElectiveDescriptor, Subject> electives;
+  final Map<num, Subject> electives;
   final List<String> route;
   final Subject currentSubject;
 
@@ -21,25 +20,32 @@ class AppState {
     this.groupSubjects,
     this.stats,
     this.route,
-    this.currentSubject
+    this.currentSubject,
   });
 
-  factory AppState.initial() =>
-      AppState(isLoading: false, groupNumber: '', route: [AppRoutes.startPage]);
+  factory AppState.initial() => AppState(
+      isLoading: false,
+      groupNumber: '',
+      route: [AppRoutes.startPage],
+      electives: Map<num, Subject>());
 
-  // AppState copyWith({
-  //   bool isLoading,
-  //   String groupNumber,
-  //   Stats stats,
-  //   List<Subject> electives,
-  //   List<Subject> groupSubjects,
-  // }) {
-  //   return AppState(
-  //     isLoading: isLoading ?? this.isLoading,
-  //     groupNumber: groupNumber ?? this.groupNumber,
-  //     stats: stats ?? this.stats,
-  //     electives: electives ?? this.stats,
-  //     groupSubjects: groupSubjects ?? this.groupSubjects,
-  //   );
-  // }
+  AppState copyWith({
+    bool isLoading,
+    String groupNumber,
+    Stats stats,
+    final Map<num, Subject> electives,
+    List<Subject> groupSubjects,
+    Subject currentSubject,
+    List<String> route,
+  }) {
+    return AppState(
+      route: route?? this.route,
+      isLoading: isLoading ?? this.isLoading,
+      groupNumber: groupNumber ?? this.groupNumber,
+      stats: stats ?? this.stats,
+      electives: electives ?? this.electives,
+      groupSubjects: groupSubjects ?? this.groupSubjects,
+      currentSubject: currentSubject ?? this.currentSubject,
+    );
+  }
 }
