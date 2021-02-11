@@ -12,11 +12,15 @@ class SubjectScreen extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return SubjectWidgetState();
+    return SubjectWidgetState(subject: subject);
   }
 }
 
 class SubjectWidgetState extends State<SubjectScreen> {
+  Subject subject;
+
+  SubjectWidgetState({this.subject});
+
   Future<void> _launchInBrowser(String url) async {
     if (await canLaunch(url)) {
       await launch(
@@ -32,7 +36,6 @@ class SubjectWidgetState extends State<SubjectScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Subject subject = this.widget.subject;
 
     return Scaffold(
       appBar: AppBar(
@@ -67,9 +70,7 @@ class SubjectWidgetState extends State<SubjectScreen> {
             ListTile(
               title: Text('Нагрузка'),
               subtitle: _buildHours(subject),
-
             ),
-
           ],
         ).toList(),
       ),

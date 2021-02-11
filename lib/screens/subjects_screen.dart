@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:semester_calc_flutter/actions/actions.dart';
+import 'package:semester_calc_flutter/models/app_state.dart';
 import 'package:semester_calc_flutter/models/credit_type.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/routes.dart';
@@ -84,8 +87,8 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
                     ),
               title: Text('${subject.name}'),
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.subject,
-                    arguments: subject);
+                StoreProvider.of<AppState>(context)
+                    .dispatch(WatchSubjectAction(subject));
               },
             );
           }
@@ -113,7 +116,8 @@ class _SubjectsWidgetState extends State<SubjectsScreen> {
           },
         ),
         onTap: () {
-          Navigator.pushNamed(context, AppRoutes.subject, arguments: element);
+          StoreProvider.of<AppState>(context)
+              .dispatch(WatchSubjectAction(element));
         },
       ));
     });

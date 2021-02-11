@@ -10,4 +10,14 @@ class Class extends Object {
     this.teacher,
     this.calendarEvent,
   });
+
+  factory Class.fromJson(Map<String, dynamic> json) {
+    Teacher teacher = Teacher.fromJson(json['teacher']);
+    CalendarEvent calendarEvent = CalendarEvent.fromJson(json['teacher']);
+
+    return Class(
+      teacher: teacher,
+      calendarEvent: calendarEvent,
+    );
+  }
 }

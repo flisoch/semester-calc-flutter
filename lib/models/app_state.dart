@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:semester_calc_flutter/models/elective_descriptor.dart';
 import 'package:semester_calc_flutter/models/stats.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/routes.dart';
@@ -6,21 +7,21 @@ import 'package:semester_calc_flutter/routes.dart';
 @immutable
 class AppState {
   final bool isLoading;
-  final bool isLoadingSubjects;
   final String groupNumber;
   final Stats stats;
   final List<Subject> groupSubjects;
-  final List<Subject> electives;
+  final Map<ElectiveDescriptor, Subject> electives;
   final List<String> route;
+  final Subject currentSubject;
 
   AppState({
     this.isLoading,
-    this.isLoadingSubjects = false,
     this.groupNumber,
     this.electives,
     this.groupSubjects,
     this.stats,
     this.route,
+    this.currentSubject
   });
 
   factory AppState.initial() =>

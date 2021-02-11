@@ -10,4 +10,5 @@ class Hours extends Object {
     this.school,
     this.selfStudy,
   });
+
 }

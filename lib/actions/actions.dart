@@ -1,3 +1,4 @@
+import 'package:semester_calc_flutter/models/elective_descriptor.dart';
 import 'package:semester_calc_flutter/models/stats.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 
@@ -49,6 +50,30 @@ class SubjectsLoadedAction {
   String toString() {
 
     return 'SubjectsLoadedAction{subjects: {IsNull:${subjects == null}}';
+  }
+}
+class WatchSubjectAction {
+  final Subject subject;
+
+  WatchSubjectAction(this.subject);
+
+  @override
+  String toString() {
+
+    return 'WatchSubjectAction{subjects: {IsNull:${subject == null}}';
+  }
+}
+class ClearElectiveAction {}
+
+class ChooseElectivesAction {
+  final Map<ElectiveDescriptor, Subject> electives;
+
+  ChooseElectivesAction(this.electives);
+
+  @override
+  String toString() {
+
+    return 'ChooseElectivesAction{electives: {IsNull:${electives == null}}';
   }
 }
 

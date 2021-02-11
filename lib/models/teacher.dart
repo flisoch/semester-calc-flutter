@@ -19,4 +19,14 @@ class Teacher extends Object {
     this.lastName = "",
     this.kpfuLink = "",
   });
+
+  factory Teacher.fromJson(Map<String, dynamic> json) {
+    return Teacher(
+      id: json['id'],
+      name: json['name'],
+      middleName: json['middleName'],
+      lastName: json['lastName'],
+      kpfuLink: json['kpfuLink'] ?? "https://kpfu.ru/student/MMChupin",
+    );
+  }
 }

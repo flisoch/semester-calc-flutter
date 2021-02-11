@@ -11,6 +11,15 @@ class CalendarEvent extends Object {
     this.startTime = "",
     this.endTime = "",
     this.repeatsNumber = -1,
-  }); //9,
+  });
 
+  factory CalendarEvent.fromJson(Map<String, dynamic> json) {
+    return CalendarEvent(
+      id: json['id'],
+      weekDay: json['weekDay'],
+      startTime: json['startTime'],
+      endTime: json['endTime'],
+      repeatsNumber: json['repeatsNumber'],
+    );
+  }
 }

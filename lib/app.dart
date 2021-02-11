@@ -6,6 +6,7 @@ import 'package:semester_calc_flutter/routes.dart';
 import 'package:semester_calc_flutter/screens/subject_screen.dart';
 import 'package:semester_calc_flutter/store_connectors/choose_group_store_connector.dart';
 import 'package:semester_calc_flutter/store_connectors/dashboard_store_connector.dart';
+import 'package:semester_calc_flutter/store_connectors/subject_store_connector.dart';
 import 'package:semester_calc_flutter/store_connectors/subjects_store_connector.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
@@ -25,7 +26,7 @@ class App extends StatelessWidget {
       case AppRoutes.subjects:
         return MaterialPageRoute(builder:(context) => SubjectsStoreConnector());
       case AppRoutes.subject:
-        return MaterialPageRoute(builder:(context) => SubjectScreen(settings.arguments));
+        return MaterialPageRoute(builder:(context) => SubjectStoreConnector());
       // case AppRoutes.settings:
       //   return MainRoute(SettingsScreen(), settings: settings);
 

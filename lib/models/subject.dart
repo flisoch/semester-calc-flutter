@@ -67,7 +67,8 @@ class Subject extends Object {
     var electiveDescriptor = json['descriptor'] == null
         ? ElectiveDescriptor()
         : ElectiveDescriptor.fromJson(json['descriptor']);
-
+    var classesJson = json['classes'] as List;
+    var classes = classesJson.map((e) => Class.fromJson(e)).toList();
     return Subject(
       id: json['id'],
       name: json['name'],
@@ -76,10 +77,11 @@ class Subject extends Object {
       hours: Hours(
           id: hours['id'],
           school: hours['school'],
-          selfStudy: hours['selfDependant']),
+          selfStudy: hours['selfStudy']),
       creditType: creditType,
       elective: json['elective'],
       electiveDescriptor: electiveDescriptor,
+      classes: classes
     );
   }
 }
