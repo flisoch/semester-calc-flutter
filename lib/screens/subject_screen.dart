@@ -81,6 +81,9 @@ class SubjectWidgetState extends State<SubjectScreen> {
     Teacher teacher1 = subject.classes.isNotEmpty
         ? subject.classes[0].teacher
         : Teacher.dummy();
+    if (subject.classes.length == 1) {
+      return true;
+    }
     Teacher teacher2 =
         subject.classes.isNotEmpty ? subject.classes[1].teacher : Teacher();
     return teacher1 == teacher2;
