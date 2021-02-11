@@ -69,7 +69,7 @@ class _MainMenuState extends State<MainMenu> {
       case 0:
         return AppRoutes.dashboard;
       case 1:
-        return AppRoutes.graphs;
+        return AppRoutes.charts;
       case 2:
         return AppRoutes.subjects;
       case 3:
