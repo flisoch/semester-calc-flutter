@@ -4,7 +4,7 @@ import 'package:semester_calc_flutter/models/subject.dart';
 
 final electivesReducer = combineReducers<Map<num,Subject>>([
   TypedReducer<Map<num,Subject>, ChooseElectiveAction>(_setChosenElectives),
-  TypedReducer<Map<num,Subject>, ClearElectiveAction>(_setNoElectives),
+  TypedReducer<Map<num,Subject>, ClearElectivesAction>(_setNoElectives),
 ]);
 
 
@@ -22,6 +22,6 @@ Map<num,Subject> _setChosenElectives(
 }
 
 Map<num,Subject> _setNoElectives(
-    Map<num,Subject> subjects, ClearElectiveAction action) {
-  return null;
+    Map<num,Subject> subjects, ClearElectivesAction action) {
+  return Map();
 }

@@ -62,7 +62,7 @@ class WatchSubjectAction {
   }
 }
 
-class ClearElectiveAction {}
+class ClearElectivesAction {}
 
 class ChooseElectiveAction {
   final num electiveDescriptorId;

@@ -6,6 +6,7 @@ import 'package:semester_calc_flutter/routes.dart';
 import 'package:semester_calc_flutter/store_connectors/charts_store_connector.dart';
 import 'package:semester_calc_flutter/store_connectors/choose_group_store_connector.dart';
 import 'package:semester_calc_flutter/store_connectors/dashboard_store_connector.dart';
+import 'package:semester_calc_flutter/store_connectors/settings_store_connector.dart';
 import 'package:semester_calc_flutter/store_connectors/subject_store_connector.dart';
 import 'package:semester_calc_flutter/store_connectors/subjects_store_connector.dart';
 
@@ -30,8 +31,8 @@ class App extends StatelessWidget {
         return MaterialPageRoute(builder: (context) => SubjectStoreConnector());
       case AppRoutes.charts:
         return MaterialPageRoute(builder: (context) => ChartsStoreConnector());
-      // case AppRoutes.settings:
-      //   return MainRoute(SettingsScreen(), settings: settings);
+      case AppRoutes.settings:
+        return MaterialPageRoute(builder: (context) => SettingsStoreConnector());
 
       default:
         return MaterialPageRoute(

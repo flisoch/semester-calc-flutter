@@ -10,7 +10,8 @@ List<Middleware<AppState>> createNavigationMiddleware() {
     TypedMiddleware<AppState, NavigateReplaceAction>(_navigateReplace),
     TypedMiddleware<AppState, NavigatePushAction>(_navigate),
     TypedMiddleware<AppState, WatchSubjectAction>(_navigateToSubject),
-    // TypedMiddleware<AppState, ChooseElectiveAction>(_navigateToGraph),
+    TypedMiddleware<AppState, ClearGroupNumberAction>(_navigateToStart),
+    TypedMiddleware<AppState, ClearElectivesAction>(_navigateToSettings),
 
   ];
 }
@@ -39,10 +40,18 @@ _navigateToSubject(Store<AppState> store, action, NextDispatcher next) {
   next(action); //This need to be after name checks
 }
 
-// _navigateToGraph(Store<AppState> store, ChooseElectiveAction action, NextDispatcher next) {
-//   final routeName = AppRoutes.graphs;
-//   if (store.state.route.last != routeName) {
-//     navigatorKey.currentState.pushNamed(routeName);
-//   }
-//   next(action);
-// }
+_navigateToStart(Store<AppState> store, action, NextDispatcher next) {
+  final routeName = AppRoutes.startPage;
+  if (store.state.route.last != routeName) {
+    navigatorKey.currentState.pushReplacementNamed(routeName);
+  }
+  next(action); //This need to be after name checks
+}
+
+_navigateToSettings(Store<AppState> store, action, NextDispatcher next) {
+  final routeName = AppRoutes.settings;
+
+  navigatorKey.currentState.pushNamed(routeName);
+
+  next(action); //This need to be after name checks
+}

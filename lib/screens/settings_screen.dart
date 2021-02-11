@@ -3,7 +3,7 @@ import 'package:semester_calc_flutter/models/subject.dart';
 
 class SettingsScreen extends StatelessWidget {
   final String groupNumber;
-  final List<Subject> electives;
+  final Map<num, Subject> electives;
   final Function clearElectives;
   final Function changeGroup;
 
@@ -46,9 +46,9 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  _buildElectives(List<Subject> electives) {
+  _buildElectives(Map<num, Subject> electives) {
     List<Widget> electivesTiles = [];
-    electives.forEach((element) {
+    electives.values.forEach((element) {
       Widget tile = ListTile(
         title: Text('${element.electiveDescriptor.name}'),
         subtitle: Text('${element.name}'),
