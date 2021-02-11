@@ -1,6 +1,5 @@
 class AppRoutes {
-  static const home = '/';
-  static const startPage = '/start_page';
+  static const startPage = '/';
   static const subject = '/subject';
   static const subjects = '/subjects';
   static const dashboard = '/dashboard';

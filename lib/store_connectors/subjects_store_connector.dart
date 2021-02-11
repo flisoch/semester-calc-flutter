@@ -17,8 +17,9 @@ class SubjectsStoreConnector extends StatelessWidget {
           store.dispatch(LoadSubjectsAction(store.state.groupNumber)),
       converter: (Store<AppState> store) => SubjectsViewModel.from(store),
       builder: (context, vm) => vm.isLoading
-          ? Center(child: CircularProgressIndicator())
-          : BottomNavigationBarWidget(
+          ? SizedBox.shrink()
+      // Scaffold(body: Center(child: CircularProgressIndicator()))
+          : MainMenu(
               screen: SubjectsScreen(subjects: vm.subjects),
               selectedIndex: 2,
             ),

@@ -14,7 +14,8 @@ Future<void> main() async {
   runApp(new App(
     store: Store<AppState>(
       appReducer,
-      middleware: createNavigationMiddleware()
+      middleware:
+      createNavigationMiddleware()
         ..addAll(createSubjectsMiddleware(SubjectsRepository()))
         ..addAll(createStatsMiddleware(DashboardRepository())),
       initialState: AppState.initial(),

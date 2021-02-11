@@ -14,17 +14,17 @@ class AppState {
   final List<String> route;
 
   AppState({
-    this.isLoading = false,
+    this.isLoading,
     this.isLoadingSubjects = false,
     this.groupNumber,
     this.electives,
     this.groupSubjects,
     this.stats,
-    this.route = const [AppRoutes.home],
+    this.route,
   });
 
   factory AppState.initial() =>
-      AppState(isLoading: true, groupNumber: '');
+      AppState(isLoading: false, groupNumber: '', route: [AppRoutes.startPage]);
 
   // AppState copyWith({
   //   bool isLoading,

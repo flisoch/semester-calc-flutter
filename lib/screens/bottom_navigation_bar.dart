@@ -5,29 +5,29 @@ import 'package:semester_calc_flutter/models/app_state.dart';
 
 import '../routes.dart';
 
-class BottomNavigationBarWidget extends StatefulWidget {
+class MainMenu extends StatefulWidget {
   final Widget screen;
   final int selectedIndex;
 
-  BottomNavigationBarWidget({
+  MainMenu({
     @required this.screen,
     @required this.selectedIndex,
   });
 
   @override
   State<StatefulWidget> createState() {
-    return _BottomNavigationBarWidgetState(
+    return _MainMenuState(
       screen: screen,
       selectedIndex: selectedIndex,
     );
   }
 }
 
-class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
+class _MainMenuState extends State<MainMenu> {
   final int selectedIndex;
   final Widget screen;
 
-  _BottomNavigationBarWidgetState({
+  _MainMenuState({
     @required this.screen,
     @required this.selectedIndex,
   });
@@ -60,7 +60,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   void _onItemTapped(int index) {
     setState(() {
       String route = getRouteByIndex(index);
-      StoreProvider.of<AppState>(context).dispatch(NavigatePushAction(route));
+      StoreProvider.of<AppState>(context).dispatch(NavigateReplaceAction(route));
     });
   }
 

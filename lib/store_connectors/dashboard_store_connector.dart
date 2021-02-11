@@ -17,8 +17,8 @@ class DashboardStoreConnector extends StatelessWidget {
             store.dispatch(LoadStatsAction(store.state.groupNumber)),
         converter: (Store<AppState> store) => DashboardViewModel.from(store),
         builder: (context, vm) => vm.isLoading
-            ? Center(child: CircularProgressIndicator())
-            : BottomNavigationBarWidget(
+            ? Scaffold(body: Center(child: CircularProgressIndicator()), )
+            : MainMenu(
                 screen: DashboardScreen(
                   stats: vm.stats,
                 ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:semester_calc_flutter/models/app_state.dart';
-import 'package:semester_calc_flutter/route_aware_widget.dart';
 import 'package:semester_calc_flutter/routes.dart';
 import 'package:semester_calc_flutter/screens/subject_screen.dart';
 import 'package:semester_calc_flutter/store_connectors/choose_group_store_connector.dart';
@@ -19,18 +18,19 @@ class App extends StatelessWidget {
   MaterialPageRoute _getRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.startPage:
-        return MainRoute(ChooseGroupConnector(), settings: settings);
+        return MaterialPageRoute(builder: (context) => ChooseGroupConnector());
       case AppRoutes.dashboard:
-        return MainRoute(DashboardStoreConnector(), settings: settings);
+        return MaterialPageRoute(
+            builder: (context) => DashboardStoreConnector());
       case AppRoutes.subjects:
-        return MainRoute(SubjectsStoreConnector(), settings: settings);
+        return MaterialPageRoute(builder:(context) => SubjectsStoreConnector());
       case AppRoutes.subject:
-        return MainRoute(SubjectScreen(settings.arguments));
+        return MaterialPageRoute(builder:(context) => SubjectScreen(settings.arguments));
       // case AppRoutes.settings:
       //   return MainRoute(SettingsScreen(), settings: settings);
 
       default:
-        return MainRoute(DashboardStoreConnector(), settings: settings);
+        return MaterialPageRoute(builder:(context) => DashboardStoreConnector(), settings: settings);
     }
   }
 
@@ -43,29 +43,10 @@ class App extends StatelessWidget {
         theme: new ThemeData(primarySwatch: Colors.green),
         initialRoute: AppRoutes.startPage,
         navigatorKey: navigatorKey,
-        navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) => _getRoute(settings),
       ),
     );
   }
 }
 
-class MainRoute<T> extends MaterialPageRoute<T> {
-  MainRoute(Widget widget, {RouteSettings settings})
-      : super(
-            builder: (_) => RouteAwareWidget(child: widget),
-            settings: settings);
 
-  @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
-    if (settings.name == '/') {
-      return child;
-    }
-    ;
-    // Fades between routes. (If you don't want any animation,
-    // just return child.)
-    // return FadeTransition(opacity: animation, child: child);
-    return child;
-  }
-}

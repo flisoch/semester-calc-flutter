@@ -12,7 +12,7 @@ final statsReducer = combineReducers<Stats>([
 
 Stats _loadStats(
     Stats stats, LoadStatsAction action) {
-  return stats;
+  return null;
 
 }
 
