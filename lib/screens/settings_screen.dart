@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatelessWidget {
   final String groupNumber;
@@ -14,6 +15,19 @@ class SettingsScreen extends StatelessWidget {
     @required this.changeGroup,
   });
 
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        // headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -38,7 +52,7 @@ class SettingsScreen extends StatelessWidget {
           // subtitle: _buildElectives(electives),
           trailing: ElevatedButton(
             child: Text('Подключить'),
-            onPressed: () => print('Connect google calendar!'),
+            onPressed: () => _launchInBrowser('http://192.168.1.167:8080/google-calendar'),
           ),
           onTap: () => print('connect google Tile!'),
         )
