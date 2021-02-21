@@ -30,8 +30,15 @@ String logStateFormatter<State>(
 _loadStats(DashboardRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
     next(action);
-    repository.loadStats(action.groupNumber).then((stats) {
+    var statsFuture;
+    if (store.state.isOffline) {
+      statsFuture = repository.loadStatsOffline(action.groupNumber);
+    } else {
+      statsFuture = repository.loadStats(action.groupNumber);
+    }
+    statsFuture.then((stats) {
       return store.dispatch(StatsLoadedAction(stats));
     }).catchError((_) => store.dispatch(StatsNotLoadedAction()));
+
   };
 }

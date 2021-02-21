@@ -12,6 +12,10 @@ class AppState {
   final Map<num, Subject> electives;
   final List<String> route;
   final Subject currentSubject;
+  final bool localDbOpened;
+
+  // final Database db;
+  final bool isOffline;
 
   AppState({
     this.isLoading,
@@ -21,13 +25,19 @@ class AppState {
     this.stats,
     this.route,
     this.currentSubject,
+    this.localDbOpened,
+    // this.db,
+    this.isOffline,
   });
 
   factory AppState.initial() => AppState(
-      isLoading: false,
-      groupNumber: '',
-      route: [AppRoutes.startPage],
-      electives: Map<num, Subject>());
+        isLoading: false,
+        groupNumber: '',
+        route: [AppRoutes.startPage],
+        electives: Map<num, Subject>(),
+        localDbOpened: false,
+        isOffline: true,
+      );
 
   AppState copyWith({
     bool isLoading,
@@ -37,15 +47,21 @@ class AppState {
     List<Subject> groupSubjects,
     Subject currentSubject,
     List<String> route,
+    bool localDbOpened,
+    // Database db,
+    bool isOffline,
   }) {
     return AppState(
-      route: route?? this.route,
+      route: route ?? this.route,
       isLoading: isLoading ?? this.isLoading,
       groupNumber: groupNumber ?? this.groupNumber,
       stats: stats ?? this.stats,
       electives: electives ?? this.electives,
       groupSubjects: groupSubjects ?? this.groupSubjects,
       currentSubject: currentSubject ?? this.currentSubject,
+      localDbOpened: localDbOpened ?? this.localDbOpened,
+      // db: db ?? this.db,
+      isOffline: isOffline ?? this.isOffline,
     );
   }
 }

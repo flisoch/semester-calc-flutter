@@ -1,3 +1,4 @@
+import 'package:sembast/src/api/v2/database.dart';
 import 'package:semester_calc_flutter/models/stats.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 
@@ -114,4 +115,16 @@ class NavigatePopAction {
   String toString() {
     return 'NavigatePopAction';
   }
+}
+
+class OpenLocalDbAction {
+  final bool localDbOpened;
+
+  OpenLocalDbAction(this.localDbOpened);
+}
+
+class LocalDbOpenedAction {
+  final Database db;
+
+  LocalDbOpenedAction(this.db);
 }

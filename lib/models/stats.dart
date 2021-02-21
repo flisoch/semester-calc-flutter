@@ -1,5 +1,4 @@
 
-
 class Stats extends Object {
   final num subjectsCount;
   final num examsCount;
@@ -41,4 +40,17 @@ class Stats extends Object {
   String toString() {
     return 'Stats: { subjectsCount: ${this.subjectsCount} ...}';
   }
+
+  Map<String, dynamic> toJson() =>
+      {
+        'subjectsCount': subjectsCount,
+        'examsCount': examsCount,
+        'creditsCount': creditsCount,
+        'classesPerWeek': classesPerWeek,
+        'classesPerDay': classesPerDay,
+        'classesToday': classesToday,
+        'hoursPerWeek': hoursPerWeek,
+        'selfStudyHoursPerWeek': selfStudyHoursPerWeek,
+        'weeksUntilExams': weeksUntilExams,
+      };
 }

@@ -6,6 +6,7 @@ import 'package:semester_calc_flutter/reducers/stats_reducer.dart';
 import 'package:semester_calc_flutter/reducers/subjects_reducer.dart';
 
 import 'current_subject_reducer.dart';
+import 'local_db_opened_reducer.dart';
 import 'navigation_reducer.dart';
 
 AppState appReducer(AppState state, action) {
@@ -17,5 +18,7 @@ AppState appReducer(AppState state, action) {
     electives: electivesReducer(state.electives, action),
     currentSubject: currentSubjectReducer(state.currentSubject, action),
     isLoading: loadingReducer(state.isLoading, action),
+    localDbOpened: localDbOpenedReducer(state.localDbOpened, action),
+    // db: localDbReducer(state.db, action),
   );
 }

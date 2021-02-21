@@ -10,6 +10,7 @@ class ChooseGroupConnector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, ChooseGroupViewModel>(
+      onInit: (store) => store.dispatch(OpenLocalDbAction(store.state.localDbOpened)),
       converter: (Store<AppState> store) {
 
         return ChooseGroupViewModel.from(store);
