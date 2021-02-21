@@ -5,5 +5,4 @@ class AppRoutes {
   static const dashboard = '/dashboard';
   static const charts = '/charts';
   static const settings = '/settings';
-
 }

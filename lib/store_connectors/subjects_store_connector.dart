@@ -18,7 +18,6 @@ class SubjectsStoreConnector extends StatelessWidget {
       converter: (Store<AppState> store) => SubjectsViewModel.from(store),
       builder: (context, vm) => vm.isLoading
           ? SizedBox.shrink()
-      // Scaffold(body: Center(child: CircularProgressIndicator()))
           : MainMenu(
               screen: SubjectsScreen(subjects: vm.subjects, chosenElectives: vm.chosenElectives),
               selectedIndex: 2,
