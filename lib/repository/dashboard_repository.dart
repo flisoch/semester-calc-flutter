@@ -9,7 +9,6 @@ import 'database_singleton.dart';
 class DashboardRepository {
   final String host = 'http://192.168.1.167:8080';
   final _statsStore = stringMapStoreFactory.store('stats');
-  Database db;
 
   Future<Stats> loadStats(String groupNumber) async {
     final response = await get('$host/api/semester?groupNumber=$groupNumber');

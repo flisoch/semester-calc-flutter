@@ -1,11 +1,12 @@
+import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:redux/redux.dart';
 import 'package:semester_calc_flutter/actions/actions.dart';
 import 'package:semester_calc_flutter/models/app_state.dart';
 import 'package:semester_calc_flutter/repository/subjects_repository.dart';
 
 List<Middleware<AppState>> createSubjectsMiddleware(
-    SubjectsRepository repository,
-    ) {
+  SubjectsRepository repository,
+) {
   return [
     TypedMiddleware<AppState, LoadSubjectsAction>(
       _loadSubjects(repository),
@@ -16,8 +17,16 @@ List<Middleware<AppState>> createSubjectsMiddleware(
 _loadSubjects(SubjectsRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
     next(action);
-    repository.loadSubjects(action.groupNumber).then((subjects) {
-      return store.dispatch(SubjectsLoadedAction(subjects));
-    }).catchError((_) => store.dispatch(SubjectsNotLoadedAction()));
+    Future subjectsFuture;
+    Connectivity().checkConnection().then((value) {
+      if (!value) {
+        subjectsFuture = repository.loadSubjectsOffline(action.groupNumber);
+      } else {
+        subjectsFuture = repository.loadSubjects(action.groupNumber);
+      }
+      subjectsFuture.then((subjects) {
+        return store.dispatch(SubjectsLoadedAction(subjects));
+      }).catchError((_) => store.dispatch(SubjectsNotLoadedAction()));
+    });
   };
 }

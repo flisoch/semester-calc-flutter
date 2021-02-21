@@ -5,6 +5,7 @@ import 'package:semester_calc_flutter/models/app_state.dart';
 import 'package:semester_calc_flutter/models/stats.dart';
 import 'package:semester_calc_flutter/models/subject.dart';
 import 'package:semester_calc_flutter/repository/dashboard_repository.dart';
+import 'package:cross_connectivity/cross_connectivity.dart';
 
 List<Middleware<AppState>> createStatsMiddleware(
   DashboardRepository repository,
@@ -31,14 +32,16 @@ _loadStats(DashboardRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
     next(action);
     var statsFuture;
-    if (store.state.isOffline) {
-      statsFuture = repository.loadStatsOffline(action.groupNumber);
-    } else {
-      statsFuture = repository.loadStats(action.groupNumber);
-    }
-    statsFuture.then((stats) {
-      return store.dispatch(StatsLoadedAction(stats));
-    }).catchError((_) => store.dispatch(StatsNotLoadedAction()));
+    Connectivity().checkConnection().then((value) {
+      if (!value) {
+        statsFuture = repository.loadStatsOffline(action.groupNumber);
+      } else {
+        statsFuture = repository.loadStats(action.groupNumber);
+      }
+      statsFuture.then((stats) {
+        return store.dispatch(StatsLoadedAction(stats));
+      }).catchError((_) => store.dispatch(StatsNotLoadedAction()));
+    });
 
   };
 }

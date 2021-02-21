@@ -13,6 +13,7 @@ class Class extends Object {
 
   factory Class.fromJson(Map<String, dynamic> json) {
     Teacher teacher = Teacher.fromJson(json['teacher']);
+    //todo: change json[teacher] to calendarEvent
     CalendarEvent calendarEvent = CalendarEvent.fromJson(json['teacher']);
 
     return Class(
@@ -20,4 +21,8 @@ class Class extends Object {
       calendarEvent: calendarEvent,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'teacher': teacher.toJson(),
+      };
 }

@@ -85,6 +85,18 @@ class Subject extends Object {
         classes: classes);
   }
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'hours': hours.toJson(),
+        'descriptor': electiveDescriptor.toJson(),
+        'elective': elective,
+        'electives': electives.map((e) => e.toJson()).toList(),
+        'classes': classes.map((e) => e.toJson()).toList(),
+        'creditType': creditType.toString(),
+        'syllabus': syllabusLink,
+      };
+
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||

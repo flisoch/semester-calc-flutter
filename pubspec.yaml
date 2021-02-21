@@ -35,6 +35,8 @@ dependencies:
   equatable: ^1.2.6
   sembast: ^2.4.10+1
   path_provider: ^1.6.27
+  flutter_offline: "^0.3.0"
+  cross_connectivity: any
 
 dev_dependencies:
   flutter_test:

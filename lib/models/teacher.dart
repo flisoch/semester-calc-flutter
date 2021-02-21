@@ -29,4 +29,12 @@ class Teacher extends Object {
       kpfuLink: json['kpfuLink'] ?? "https://kpfu.ru/student/MMChupin",
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'middleName': middleName,
+        'lastName': lastName,
+        'kpfuLink': kpfuLink,
+      };
 }

@@ -11,4 +11,10 @@ class Hours extends Object {
     this.selfStudy,
   });
 
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'school' : school,
+    'selfStudy': selfStudy,
+  };
+
 }
